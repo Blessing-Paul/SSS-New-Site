@@ -1,0 +1,35 @@
+<main>
+  <section class="ph">
+    <div class="site-container ph-grid single">
+      <div>
+        <span class="kicker">Secure access</span>
+        <h1>Welcome <em>back.</em></h1>
+        <p class="ph-lead">Sign in to continue to your Stable Shield workspace.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ps tight">
+    <div class="site-container">
+      <form class="form-p f-stack login-form" (submit)="onSubmit($event)">
+        <div class="form-head">
+          <h2>Sign in</h2>
+          <p>Enter your account details to continue.</p>
+        </div>
+        <label>Username
+          <input type="text" name="username" autocomplete="username" required>
+        </label>
+        <label>Password
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <div class="login-options">
+          <label class="f-check"><input type="checkbox" name="remember"> Remember me</label>
+          <a href="/contact">Need help signing in?</a>
+        </div>
+        <button class="btn-p primary" type="submit">Sign in <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+        <p class="f-status" role="status" aria-live="polite">{{ status }}</p>
+        <p class="login-note"><i class="bi bi-shield-lock" aria-hidden="true"></i> Authentication is not connected yet. This page does not send or store your credentials.</p>
+      </form>
+    </div>
+  </section>
+</main>

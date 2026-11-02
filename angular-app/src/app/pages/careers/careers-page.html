@@ -1,0 +1,126 @@
+<main>
+    <section class="ph">
+      <div class="site-container ph-grid">
+        <div>
+          <span class="kicker">Careers at Stable Shield</span>
+          <h1>Build technology that <em>keeps organizations moving.</em></h1>
+          <p class="ph-lead">Join a team that designs, builds and secures the systems schools, governments and businesses rely on every day.</p>
+          <div class="ph-actions">
+            <a class="btn-p primary" href="#openings">View open roles <i class="bi bi-arrow-down" aria-hidden="true"></i></a>
+            <a class="btn-p outline" href="/apply?role=General%20application">Send a general application</a>
+          </div>
+        </div>
+        <div class="ph-media">
+          <img src="https://images.unsplash.com/photo-1573496527892-904f897eb744?auto=format&amp;fit=crop&amp;w=1100&amp;q=80" alt="A Stable Shield team member at work">
+          <div class="ph-float"><i class="bi bi-rocket-takeoff"></i><div><strong>Grow with us</strong><small>Mentorship, certifications and real projects from week one.</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">Why Join Us</span><h2 class="ps-title">Work that matters, <em>people who care.</em></h2></div><p>We are a growing team, and every person here shapes how we work and what we deliver.</p></div>
+        <div class="g g-4">
+          <article class="card-p reveal"><span class="ico"><i class="bi bi-rocket-takeoff" aria-hidden="true"></i></span><h3>Real projects</h3><p>Work on live systems for real clients from your first weeks, not side projects.</p></article>
+          <article class="card-p reveal"><span class="ico red"><i class="bi bi-mortarboard" aria-hidden="true"></i></span><h3>Learning and growth</h3><p>Mentorship, certification support and time to learn new tools and skills.</p></article>
+          <article class="card-p reveal"><span class="ico"><i class="bi bi-people" aria-hidden="true"></i></span><h3>Supportive team</h3><p>Small, collaborative teams where questions are welcome and help is close.</p></article>
+          <article class="card-p reveal"><span class="ico red"><i class="bi bi-shield-check" aria-hidden="true"></i></span><h3>Do it properly</h3><p>Security and quality are part of how we build, not an afterthought.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps alt" id="openings">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">Open Positions</span><h2 class="ps-title">Current openings</h2></div><p>Choose a role to read the details. Don't see a fit? Send a general application below.</p></div>
+        <div class="job-filters" role="group" aria-label="Filter roles by department">
+          @for (department of departments; track department) {
+            <button type="button" [attr.aria-pressed]="selectedDepartment === department"
+              (click)="selectedDepartment = department">{{ department }}</button>
+          }
+        </div>
+        <div class="job-list" id="job-list" aria-live="polite">
+          @if (!jobs.length && !loadFailed) {
+            <p class="job-empty">Loading open roles…</p>
+          } @else if (!visibleJobs.length) {
+            <div class="job-empty"><i class="bi bi-inbox" aria-hidden="true"></i><strong>No open roles right now</strong><span>We are always happy to hear from talented people. <a href="#apply">Send a general application</a>.</span></div>
+          } @else {
+            @for (job of visibleJobs; track job.id) {
+              <details class="job-card" [attr.data-department]="job.department">
+                <summary>
+                  <div class="job-main">
+                    <span class="job-dept">{{ job.department }}</span>
+                    <h3>{{ job.title }}</h3>
+                    <div class="job-meta">
+                      <span><i class="bi bi-geo-alt" aria-hidden="true"></i>{{ job.location }}</span>
+                      <span><i class="bi bi-clock" aria-hidden="true"></i>{{ job.type }}</span>
+                    </div>
+                  </div>
+                  <span class="job-toggle" aria-hidden="true"><i class="bi bi-chevron-down"></i></span>
+                </summary>
+                <div class="job-body">
+                  <p>{{ job.summary }}</p>
+                  <div class="job-columns">
+                    <div><h4>What you'll do</h4><ul>@for (item of job.responsibilities; track item) { <li>{{ item }}</li> }</ul></div>
+                    <div><h4>What we're looking for</h4><ul>@for (item of job.requirements; track item) { <li>{{ item }}</li> }</ul></div>
+                  </div>
+                  <a class="btn-p primary job-apply" [href]="applicationUrl(job.title)">Apply for this role <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+                </div>
+              </details>
+            }
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="ps">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">Hiring Process</span><h2 class="ps-title">What happens after you apply</h2></div><p>We keep the process short and let you know where you stand at every step.</p></div>
+        <ol class="steps">
+          <li class="reveal"><h3>Apply</h3><p>Send your details and CV using the form below.</p></li>
+          <li class="reveal"><h3>Review</h3><p>We review every application and reply to shortlisted candidates.</p></li>
+          <li class="reveal"><h3>Interview</h3><p>A conversation with the team, plus a practical task for technical roles.</p></li>
+          <li class="reveal"><h3>Offer</h3><p>Successful candidates receive an offer and an onboarding plan.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ps" id="apply">
+      <div class="site-container split" style="align-items:start">
+        <div class="reveal">
+          <span class="kicker">Apply now</span>
+          <h2 class="ps-title">Ready to <em>join the team?</em></h2>
+          <p class="ps-lead" style="margin:18px 0 24px">Tell us a little about yourself and attach your CV. Pick a role from the list above, or send a general application. We read every one.</p>
+          <ul class="ticks"><li>We reply to every shortlisted candidate</li><li>Interviews include a practical task for technical roles</li><li>Your details are only used to assess your application</li></ul>
+          <ol class="meet-steps">
+            <li><span><i class="bi bi-send-check"></i></span><div><strong>Send your application</strong>Your details and CV arrive straight to our hiring team.</div></li>
+            <li><span><i class="bi bi-eye"></i></span><div><strong>We review it carefully</strong>A real person reads every application, usually within a week.</div></li>
+            <li><span><i class="bi bi-chat-dots"></i></span><div><strong>Let's talk</strong>Shortlisted candidates are invited to a friendly interview.</div></li>
+          </ol>
+          <figure class="apply-photo">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&amp;fit=crop&amp;w=900&amp;h=520&amp;q=80" alt="Team members collaborating at work" loading="lazy" width="900" height="520">
+            <figcaption><i class="bi bi-people-fill"></i><span><strong>Join a growing team</strong>Engineers, analysts and support specialists building systems that matter.</span></figcaption>
+          </figure>
+        </div>
+        <form class="form-p f-stack reveal" data-preview-form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+          <input type="hidden" name="form-name" value="career-application">
+          <p hidden><label>Do not fill this out: <input name="bot-field"></label></p>
+          <div class="form-head">
+            <h3>Job application</h3>
+            <p>Fields marked * are required.</p>
+          </div>
+          <div class="f-row"><label>Full name *<input type="text" name="name" placeholder="Your name" required autocomplete="name"></label><label>Email *<input type="email" name="email" placeholder="you@example.com" required autocomplete="email"></label></div>
+          <div class="f-row"><label>Phone number *<input type="tel" name="phone" placeholder="+234…" required autocomplete="tel"></label><label>LinkedIn or portfolio<input type="url" name="portfolio" placeholder="https://"></label></div>
+          <label>Role *<select name="role" id="apply-role" required [value]="selectedRole" (change)="onRoleChange($event)">
+              <option value="">Choose a role</option>
+              <option>General application</option>
+              @for (job of jobs; track job.id) { <option [value]="job.title">{{ job.title }}</option> }
+            </select></label>
+          <label>CV / résumé * <small class="f-hint">PDF or Word, max 8 MB</small><input type="file" name="cv" accept=".pdf,.doc,.docx" required></label>
+          <label>Why are you a good fit?<textarea name="message" placeholder="A short note about your experience and interests"></textarea></label>
+          <label class="f-check"><input type="checkbox" name="consent" required> I agree that Stable Shield Solutions may store my details to assess this application, as described in the <a href="/privacy">privacy notice</a>.</label>
+          <button class="btn-p primary" type="submit">Submit application <i class="bi bi-send" aria-hidden="true"></i></button>
+          <p class="f-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>

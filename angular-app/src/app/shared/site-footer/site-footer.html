@@ -1,0 +1,56 @@
+<footer class="site-footer ft">
+  <div class="site-container ft-cta">
+    <div>
+      <span class="kicker">Let's talk</span>
+      <h2>Have a project, a product question or an idea to partner on?</h2>
+    </div>
+    <div class="ft-cta-actions">
+      <a class="btn-p primary" href="/contact">Start a conversation <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+      <a class="btn-p outline" href="/products#demo">Book a product demo</a>
+    </div>
+  </div>
+  <div class="site-container ft-main">
+    <div class="ft-brand">
+      <a href="/" aria-label="Stable Shield Solutions home">
+        <img class="ft-logo-day" src="assets/stable-shield-logo-transparent.png" alt="Stable Shield Solutions">
+        <img class="ft-logo-night" src="assets/stable-shield-logo-light.png" alt="" aria-hidden="true">
+      </a>
+      <p>Technology that works. Security that protects. Innovation that moves you forward.</p>
+      <div class="ft-social">
+        <a href="/contact" aria-label="Email us"><i class="bi bi-envelope" aria-hidden="true"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+        <a href="#" aria-label="X (Twitter)"><i class="bi bi-twitter-x" aria-hidden="true"></i></a>
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <nav class="ft-col" aria-label="Company">
+      <h4>Company</h4>
+      <a href="/about">About us</a>
+      <a href="/about#leadership">Leadership</a>
+      <a href="/careers">Careers</a>
+      <a href="/partners">Partner with us</a>
+    </nav>
+    <nav class="ft-col" aria-label="Solutions">
+      <h4>Solutions</h4>
+      <a href="/services">Services</a>
+      <a href="/products">Silo products</a>
+      <a href="/industries">Industries</a>
+      <a href="/partners?type=co-development#apply">In-house project partnership</a>
+    </nav>
+    <nav class="ft-col" aria-label="Help">
+      <h4>Help</h4>
+      <a href="/support">Support centre</a>
+      <a href="/resources">Insights &amp; resources</a>
+      <a href="/contact">Contact</a>
+      <a href="/portal"><i class="bi bi-person-lock" aria-hidden="true"></i> Staff login</a>
+    </nav>
+  </div>
+  <div class="site-container ft-bottom">
+    <span>© <span id="year">{{ year }}</span> Stable Shield Solutions Limited. All rights reserved.</span>
+    <div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/accessibility">Accessibility</a></div>
+  </div>
+</footer>
+<button class="scroll-top" type="button" aria-label="Scroll to top" title="Back to top"
+  [class.is-visible]="visible" (click)="scrollToTop()">
+  <i class="bi bi-arrow-up" aria-hidden="true"></i>
+</button>

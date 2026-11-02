@@ -1,0 +1,43 @@
+html:not([data-theme="dark"]) .home .hero-approach-icon {
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(235, 241, 248, 0.58));
+  box-shadow: 0 6px 18px rgba(19, 50, 85, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px) saturate(155%);
+  -webkit-backdrop-filter: blur(12px) saturate(155%);
+}
+
+html:not([data-theme="dark"]) .home .hero-approach-link:hover .hero-approach-icon {
+  border-color: var(--h-red);
+  box-shadow: 0 8px 20px rgba(213, 23, 48, 0.24);
+}
+
+.application-form {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.login-form {
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--p-muted);
+  font-size: 14px;
+}
+
+.login-options a,
+.login-note i {
+  color: var(--p-red);
+}
+
+.login-note {
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "software-developer",
+    "title": "Software Developer (Full-stack)",
+    "department": "Engineering",
+    "location": "Abuja, Nigeria",
+    "type": "Full-time",
+    "summary": "Build and maintain web applications, portals and management systems for our clients in education, government and enterprise.",
+    "responsibilities": [
+      "Design, build and test web applications and APIs",
+      "Work with the project team to turn requirements into working features",
+      "Maintain and improve existing client systems",
+      "Write clear documentation for the systems you build"
+    ],
+    "requirements": [
+      "2+ years of professional software development experience",
+      "Working knowledge of JavaScript/TypeScript and at least one backend language",
+      "Experience with relational databases and REST APIs",
+      "Good communication and problem-solving skills"
+    ]
+  },
+  {
+    "id": "network-infrastructure-engineer",
+    "title": "Network & Infrastructure Engineer",
+    "department": "Infrastructure",
+    "location": "Abuja, Nigeria",
+    "type": "Full-time",
+    "summary": "Plan, deploy and support networks, servers and cloud environments for client sites.",
+    "responsibilities": [
+      "Install and configure network equipment, servers and backups",
+      "Monitor client infrastructure and resolve incidents",
+      "Carry out site surveys and prepare deployment plans",
+      "Keep accurate records of configurations and changes"
+    ],
+    "requirements": [
+      "Hands-on experience with routing, switching and Wi-Fi",
+      "Familiarity with Windows/Linux server administration",
+      "CCNA or similar certification is an advantage",
+      "Willingness to travel to client sites"
+    ]
+  },
+  {
+    "id": "cybersecurity-analyst",
+    "title": "Cybersecurity Analyst",
+    "department": "Security",
+    "location": "Hybrid",
+    "type": "Full-time",
+    "summary": "Help clients understand their security risks and put practical controls in place.",
+    "responsibilities": [
+      "Run security assessments and vulnerability scans",
+      "Recommend and help implement security controls",
+      "Support incident response and post-incident reviews",
+      "Prepare clear reports for technical and non-technical readers"
+    ],
+    "requirements": [
+      "Understanding of common threats, controls and security frameworks",
+      "Experience with security tooling (SIEM, scanners, endpoint protection)",
+      "Security+ or similar certification is an advantage"
+    ]
+  },
+  {
+    "id": "it-support-intern",
+    "title": "IT Support Intern",
+    "department": "Support",
+    "location": "Abuja, Nigeria",
+    "type": "Internship",
+    "summary": "Learn on the job while helping our support team keep client systems running.",
+    "responsibilities": [
+      "Respond to support requests and log issues",
+      "Assist with hardware setup and software installation",
+      "Shadow engineers on client deployments"
+    ],
+    "requirements": [
+      "Studying or recently graduated in Computer Science, IT or a related field",
+      "Eagerness to learn and a customer-friendly attitude"
+    ]
+  }
+]

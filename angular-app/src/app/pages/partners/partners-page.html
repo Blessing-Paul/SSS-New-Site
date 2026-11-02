@@ -1,0 +1,171 @@
+<main>
+    <section class="ph">
+      <div class="site-container ph-grid">
+        <div>
+          <span class="kicker">Partner programme</span>
+          <h1>Let's grow <em>together.</em></h1>
+          <p class="ph-lead">Whether you want to sell our products, deliver projects with us, connect your technology to ours or get help with a project your team is already building, this is where it starts. Read the options, then apply in about five minutes.</p>
+          <div class="ph-actions">
+            <a class="btn-p primary" href="#apply">Apply to partner <i class="bi bi-arrow-down"></i></a>
+            <a class="btn-p outline" href="#models">Partnership models</a>
+          </div>
+        </div>
+        <div class="ph-stats">
+          <div class="ph-stat"><i class="bi bi-shop"></i><strong>Resellers</strong><span>Sell and support Silo products in your market.</span></div>
+          <div class="ph-stat"><i class="bi bi-tools"></i><strong>Implementers</strong><span>Deploy, configure and train on client projects.</span></div>
+          <div class="ph-stat"><i class="bi bi-plug"></i><strong>Technology</strong><span>Integrate hardware, cloud, payments or software.</span></div>
+          <div class="ph-stat"><i class="bi bi-people"></i><strong>Co-development</strong><span>We join your team on in-house projects.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps" id="models">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">Partnership models</span><h2 class="ps-title">Choose how you'd like <em>to work with us.</em></h2></div><p>Pick the one that sounds most like you. If you're unsure, choose the closest and tell us more in the application. We'll guide you.</p></div>
+        <div class="g g-2">
+          <article class="card-p reveal"><span class="ico red"><i class="bi bi-shop"></i></span><h3>Reseller &amp; referral partners</h3><p>Introduce or resell School Silo, Office Silo or Training Silo to organizations in your network or region.</p><ul class="ticks"><li>Sales and product training</li><li>Demo environments and materials</li><li>Referral or reseller margins</li></ul></article>
+          <article class="card-p reveal"><span class="ico"><i class="bi bi-tools"></i></span><h3>Implementation partners</h3><p>Deliver deployments, data migration, training and first-line support alongside our team.</p><ul class="ticks"><li>Technical onboarding</li><li>Shared delivery playbooks</li><li>Escalation to our engineers</li></ul></article>
+          <article class="card-p reveal"><span class="ico red"><i class="bi bi-plug"></i></span><h3>Technology partners</h3><p>Vendors of cloud, networking, security, payments or software that integrate with our solutions.</p><ul class="ticks"><li>Joint solution design</li><li>Integration support</li><li>Co-marketing opportunities</li></ul></article>
+          <article class="card-p reveal"><span class="ico"><i class="bi bi-people"></i></span><h3>Co-development partners</h3><p>Organizations with in-house projects who want extra capacity, specialist skills or a team to finish and launch.</p><ul class="ticks"><li>Engineers embedded in your team</li><li>Architecture, security &amp; code reviews</li><li>You keep ownership of your project</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps alt">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">What to expect</span><h2 class="ps-title">From application <em>to partnership.</em></h2></div><p>Here's what happens after you hit submit, so there are no surprises.</p></div>
+        <ol class="steps">
+          <li class="reveal"><h3>Apply</h3><p>Complete the five-step application below.</p></li>
+          <li class="reveal"><h3>Review</h3><p>Our partnerships team assesses fit and capabilities.</p></li>
+          <li class="reveal"><h3>Discuss</h3><p>A call to agree scope, roles and commercial terms.</p></li>
+          <li class="reveal"><h3>Onboard</h3><p>Agreement, training and access to partner resources.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ps" id="apply">
+      <div class="site-container">
+        <div class="ps-head center reveal"><span class="kicker">Partner application</span><h2 class="ps-title">Apply to become <em>a partner.</em></h2><p class="ps-lead">About 5 minutes. Fields marked * are required. You can review everything before submitting.</p></div>
+
+        <form class="form-p" id="partner-form" #partnerForm name="partner-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate style="max-width:900px;margin-inline:auto" (submit)="onSubmit($event)">
+          <input type="hidden" name="form-name" value="partner-application">
+          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+
+          <ol class="stepper" aria-label="Application progress">
+            <li [class.done]="currentStep > 0" [class.current]="currentStep === 0" [attr.aria-current]="currentStep === 0 ? 'step' : null">Partnership</li>
+            <li [class.done]="currentStep > 1" [class.current]="currentStep === 1" [attr.aria-current]="currentStep === 1 ? 'step' : null">Organization</li>
+            <li [class.done]="currentStep > 2" [class.current]="currentStep === 2" [attr.aria-current]="currentStep === 2 ? 'step' : null">Contact</li>
+            <li [class.done]="currentStep > 3" [class.current]="currentStep === 3" [attr.aria-current]="currentStep === 3 ? 'step' : null">Details</li>
+            <li [class.done]="currentStep > 4" [class.current]="currentStep === 4" [attr.aria-current]="currentStep === 4 ? 'step' : null">Review</li>
+          </ol>
+
+          <fieldset class="step-panel" data-step="1" [hidden]="currentStep !== 0">
+            <h3>What kind of partnership?</h3>
+            <p>Choose the model that best describes what you have in mind.</p>
+            <div class="f-stack">
+              <div class="choices" role="radiogroup" aria-label="Partnership type">
+                <label class="choice"><input type="radio" name="partnership_type" value="Reseller / referral" data-key="reseller" required (change)="onPartnershipTypeChange()"><span><i class="bi bi-shop"></i>Reseller / referral<small>Sell or refer Silo products</small></span></label>
+                <label class="choice"><input type="radio" name="partnership_type" value="Implementation" data-key="implementation" (change)="onPartnershipTypeChange()"><span><i class="bi bi-tools"></i>Implementation<small>Deploy &amp; support projects</small></span></label>
+                <label class="choice"><input type="radio" name="partnership_type" value="Technology" data-key="technology" (change)="onPartnershipTypeChange()"><span><i class="bi bi-plug"></i>Technology<small>Integrate your product</small></span></label>
+                <label class="choice"><input type="radio" name="partnership_type" value="Co-development (in-house project)" data-key="co-development" (change)="onPartnershipTypeChange()"><span><i class="bi bi-people"></i>Co-development<small>Partner on your in-house project</small></span></label>
+              </div>
+              <div>
+                <legend>Which product or service is this for? *</legend>
+                <div class="choices">
+                  <label class="choice"><input type="checkbox" name="products" value="School Silo"><span><i class="bi bi-mortarboard"></i>School Silo</span></label>
+                  <label class="choice"><input type="checkbox" name="products" value="Office Silo"><span><i class="bi bi-briefcase"></i>Office Silo</span></label>
+                  <label class="choice"><input type="checkbox" name="products" value="Training Silo"><span><i class="bi bi-journal-check"></i>Training Silo</span></label>
+                  <label class="choice"><input type="checkbox" name="products" value="Custom software / services"><span><i class="bi bi-code-slash"></i>Custom software &amp; services</span></label>
+                  <label class="choice"><input type="checkbox" name="products" value="Infrastructure & security"><span><i class="bi bi-hdd-network"></i>Infrastructure &amp; security</span></label>
+                  <label class="choice"><input type="checkbox" name="products" value="My in-house project"><span><i class="bi bi-kanban"></i>Our in-house project</span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-panel" data-step="2" [hidden]="currentStep !== 1">
+            <h3>About your organization</h3>
+            <p>Help us understand who you are.</p>
+            <div class="f-stack">
+              <div class="f-row"><label>Organization name *<input name="organization" required autocomplete="organization"></label><label>Registration / RC number<input name="registration_number"></label></div>
+              <div class="f-row">
+                <label>Organization type *<select name="organization_type" required><option value="">Choose one</option><option>Technology company</option><option>Consultancy</option><option>Reseller / distributor</option><option>School or university</option><option>Government institution</option><option>NGO / non-profit</option><option>Faith-based organization</option><option>Business / enterprise</option><option>Other</option></select></label>
+                <label>Team size *<select name="team_size" required><option value="">Choose one</option><option>1–10</option><option>11–50</option><option>51–200</option><option>201–1,000</option><option>1,000+</option></select></label>
+              </div>
+              <div class="f-row"><label>Website<input type="url" name="website" placeholder="https://"></label><label>Years in operation<input type="number" name="years_operating" min="0"></label></div>
+              <div class="f-row"><label>Country *<input name="country" required autocomplete="country-name"></label><label>City / state *<input name="city" required autocomplete="address-level2"></label></div>
+              <label>Office address<input name="address" autocomplete="street-address"></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-panel" data-step="3" [hidden]="currentStep !== 2">
+            <h3>Primary contact</h3>
+            <p>The person we should speak with about this partnership.</p>
+            <div class="f-stack">
+              <div class="f-row"><label>Full name *<input name="contact_name" required autocomplete="name"></label><label>Job title *<input name="contact_title" required autocomplete="organization-title"></label></div>
+              <div class="f-row"><label>Work email *<input type="email" name="contact_email" required autocomplete="email"></label><label>Phone number *<input type="tel" name="contact_phone" required autocomplete="tel" placeholder="+234…"></label></div>
+              <label>Preferred contact method<select name="contact_method"><option>Email</option><option>Phone call</option><option>WhatsApp</option><option>Video meeting</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-panel" data-step="4" [hidden]="currentStep !== 3">
+            <h3>Partnership details</h3>
+            <p>Tell us what you bring and what you'd like to achieve.</p>
+            <div class="f-stack">
+              <label>Your capabilities and experience *<textarea name="capabilities" required placeholder="Services, products, technical skills, certifications and relevant clients or projects"></textarea></label>
+              <div class="f-row">
+                <label>Markets / regions you cover<input name="regions" placeholder="e.g. Lagos, South-West, West Africa"></label>
+                <label>Sectors you serve<input name="sectors" placeholder="e.g. Schools, NGOs, government"></label>
+              </div>
+              <div class="co-dev-only f-stack" [hidden]="!isCoDevelopment">
+                <label>About your in-house project *<textarea name="project_description" [required]="isCoDevelopment" placeholder="What are you building, what stage is it at, and what help do you need?"></textarea></label>
+                <div class="f-row">
+                  <label>Current stage<select name="project_stage"><option>Idea / planning</option><option>In development</option><option>Stalled / needs rescue</option><option>Live, needs improvement</option></select></label>
+                  <label>Technology stack<input name="project_stack" placeholder="e.g. Laravel, React, MySQL"></label>
+                </div>
+                <label>Support needed<select name="project_support"><option>Extra developers</option><option>Architecture &amp; code review</option><option>Infrastructure &amp; hosting</option><option>Security review</option><option>Full delivery to launch</option></select></label>
+              </div>
+              <div class="f-row">
+                <label>Expected timeline<select name="timeline"><option>Immediately</option><option>Within 3 months</option><option>3–6 months</option><option>Exploring options</option></select></label>
+                <label>Estimated annual opportunity / budget<select name="budget"><option>Prefer not to say</option><option>Under ₦5m</option><option>₦5m–₦25m</option><option>₦25m–₦100m</option><option>Above ₦100m</option></select></label>
+              </div>
+              <label>Partnership goals *<textarea name="goals" required placeholder="What would a successful partnership look like for you?"></textarea></label>
+              <label>How did you hear about us?<select name="source"><option>Referral</option><option>Search engine</option><option>Social media</option><option>Event</option><option>Existing client</option><option>Other</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-panel" data-step="5" [hidden]="currentStep !== 4">
+            <h3>Review &amp; submit</h3>
+            <p>Check your details. Use Back to make changes.</p>
+            <dl class="review" id="partner-review">
+              @for (row of reviewRows; track row.name) {
+                <div><dt>{{ row.label }}</dt><dd>{{ row.value }}</dd></div>
+              }
+            </dl>
+            <div class="f-stack" style="margin-top:20px">
+              <label class="f-check"><input type="checkbox" name="consent" required> I confirm the information is accurate and agree that Stable Shield Solutions may contact me about this application, as described in the <a href="/privacy">privacy notice</a>.</label>
+            </div>
+          </fieldset>
+
+          <div class="step-nav">
+            <button class="btn-p outline" type="button" [style.visibility]="currentStep === 0 ? 'hidden' : 'visible'" (click)="previousStep()"><i class="bi bi-arrow-left"></i> Back</button>
+            <button class="btn-p primary" type="button" [hidden]="currentStep === 4" (click)="nextStep()">Continue <i class="bi bi-arrow-right"></i></button>
+            <button class="btn-p primary" type="submit" [hidden]="currentStep !== 4">Submit application <i class="bi bi-send"></i></button>
+          </div>
+          <p class="f-status" role="status" aria-live="polite">{{ status }}</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="ps alt">
+      <div class="site-container">
+        <div class="ps-head center reveal"><span class="kicker">Partner FAQ</span><h2 class="ps-title">Before you apply</h2></div>
+        <div class="faq-p">
+          <details class="reveal"><summary>Is there a fee to become a partner?</summary><p>No application fee. Commercial terms, such as margins, revenue share or service rates, are agreed during onboarding.</p></details>
+          <details class="reveal"><summary>Who owns the code on a co-development project?</summary><p>You do. Ownership, licensing and confidentiality are set out in the agreement before work begins.</p></details>
+          <details class="reveal"><summary>Do partners receive training?</summary><p>Yes. Resellers and implementers get product, sales and technical training plus access to demo environments.</p></details>
+          <details class="reveal"><summary>How long does review take?</summary><p>We aim to respond within a few working days with next steps or questions.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>

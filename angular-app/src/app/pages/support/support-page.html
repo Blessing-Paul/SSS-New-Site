@@ -1,0 +1,92 @@
+<main>
+    <section class="ph">
+      <div class="site-container ph-grid">
+        <div>
+          <span class="kicker">Support centre</span>
+          <h1>Something not working? <em>We're here to help.</em></h1>
+          <p class="ph-lead">If you're a Stable Shield client or use a Silo product, this is the fastest way to get help, whether it's an error, a question or a request for training.</p>
+          <div class="ph-actions"><a class="btn-p primary" href="#request">Submit a request <i class="bi bi-arrow-down"></i></a><a class="btn-p outline" href="#faq">Browse FAQs</a></div>
+        </div>
+        <div class="ph-stats">
+          <div class="ph-stat"><i class="bi bi-question-circle"></i><strong>Product questions</strong><span>Modules, roles, deployment and documentation.</span></div>
+          <div class="ph-stat"><i class="bi bi-wrench-adjustable"></i><strong>Technical issues</strong><span>Errors, outages, access and performance.</span></div>
+          <div class="ph-stat"><i class="bi bi-mortarboard"></i><strong>Training</strong><span>Onboarding, refreshers and new staff.</span></div>
+          <div class="ph-stat"><i class="bi bi-plus-square"></i><strong>Change requests</strong><span>New features, reports or integrations.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">Before you contact us</span><h2 class="ps-title">Help us resolve it <em>faster.</em></h2></div><p>The more we know upfront, the quicker we can fix it. Please include these, and never send passwords.</p></div>
+        <ol class="steps">
+          <li class="reveal"><h3>System &amp; version</h3><p>Which product, site or system is affected.</p></li>
+          <li class="reveal"><h3>What happened</h3><p>A short summary and any error message or screenshot.</p></li>
+          <li class="reveal"><h3>Steps to reproduce</h3><p>What you did just before the issue appeared.</p></li>
+          <li class="reveal"><h3>Urgency</h3><p>How many users are affected and the business impact.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ps alt" id="request">
+      <div class="site-container split" style="align-items:start">
+        <div class="reveal">
+          <span class="kicker">Service request</span>
+          <h2 class="ps-title">Submit a <em>support request.</em></h2>
+          <p class="ps-lead" style="margin:18px 0 24px">Response targets, support hours and escalation routes are defined in your support agreement.</p>
+          <div class="info-list">
+            <div><i class="bi bi-exclamation-octagon"></i><span><strong>Critical</strong>System down or data at risk, all users affected.</span></div>
+            <div><i class="bi bi-exclamation-triangle"></i><span><strong>High</strong>Major feature unavailable, workaround hard.</span></div>
+            <div><i class="bi bi-info-circle"></i><span><strong>Normal</strong>Questions, minor issues and how-to requests.</span></div>
+          </div>
+        </div>
+        <form class="form-p f-stack reveal" name="support-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
+          <input type="hidden" name="form-name" value="support-request">
+          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+          <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Organization *<input name="organization" required autocomplete="organization"></label></div>
+          <div class="f-row"><label>Email *<input type="email" name="email" required autocomplete="email"></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
+          <div class="f-row">
+            <label>System *<select name="system" required><option value="">Choose one</option><option>School Silo</option><option>Office Silo</option><option>Training Silo</option><option>Custom application</option><option>Website</option><option>Server / network</option><option>Other</option></select></label>
+            <label>Priority<select name="priority"><option>Normal</option><option>High</option><option>Critical</option></select></label>
+          </div>
+          <label>Describe the issue *<textarea name="message" required placeholder="What happened, steps to reproduce, error messages"></textarea></label>
+          <button class="btn-p primary" type="submit">Submit request <i class="bi bi-send"></i></button>
+          <p class="f-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="ps" id="faq">
+      <div class="site-container">
+        <div class="ps-head center reveal"><span class="kicker">Support FAQ</span><h2 class="ps-title">Quick answers</h2></div>
+        <div class="faq-p">
+          <details class="reveal"><summary>I can't sign in to my Silo product.</summary><p>Use "Forgot password" on the sign-in page. If that doesn't work, your administrator can reset your account, or submit a request above.</p></details>
+          <details class="reveal"><summary>Can you train our new staff?</summary><p>Yes. Training can be arranged under your support agreement or as a separate engagement.</p></details>
+          <details class="reveal"><summary>How do I request a new feature or report?</summary><p>Submit a request with the "Normal" priority and describe what you need. We'll scope and quote it.</p></details>
+          <details class="reveal"><summary>Do you support systems you didn't build?</summary><p>Often, yes. We can assess third-party or in-house systems and propose a support or <a href="/partners?type=co-development#apply">co-development</a> arrangement.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps tight" id="co-development">
+      <div class="site-container">
+        <div class="collab reveal">
+          <div>
+            <span class="kicker">Co-development partnership</span>
+            <h2>Already building something in-house? Let's build it together.</h2>
+            <p>We partner with organizations on their existing in-house projects, joining your team to add capacity, unblock difficult work and take systems safely to production. You keep ownership; we bring the engineering, infrastructure and security depth.</p>
+            <div class="ph-actions">
+              <a class="btn-p primary" href="/partners?type=co-development#apply">Partner on your project <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+              <a class="btn-p ghost-light" href="/partners#models">How partnership works</a>
+            </div>
+          </div>
+          <ul>
+            <li><i class="bi bi-people" aria-hidden="true"></i><span><strong>Extend your team</strong>Developers, network and security engineers working alongside your staff.</span></li>
+            <li><i class="bi bi-lightning-charge" aria-hidden="true"></i><span><strong>Rescue or accelerate</strong>Review, stabilize and finish projects that have stalled or slipped.</span></li>
+            <li><i class="bi bi-shield-check" aria-hidden="true"></i><span><strong>Harden and launch</strong>Security reviews, hosting, integrations, training and handover.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>

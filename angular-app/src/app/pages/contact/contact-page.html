@@ -1,0 +1,100 @@
+<main>
+    <section class="ph">
+      <div class="site-container ph-grid">
+        <div>
+          <span class="kicker">Contact us</span>
+          <h1>Let's discuss what <em>you want to build.</em></h1>
+          <p class="ph-lead">You don't need a detailed brief or the right technical words. Just tell us what's slowing you down or what you'd like to achieve, and a real person will get back to you with practical next steps.</p>
+          <div class="ph-actions"><a class="btn-p primary" href="#enquiry">Start an enquiry <i class="bi bi-arrow-down"></i></a><a class="btn-p outline" href="#book">Book a meeting</a></div>
+        </div>
+        <div class="info-list">
+          <div><i class="bi bi-chat-dots"></i><span><strong>Project enquiries</strong>New software, infrastructure or transformation projects.</span></div>
+          <div><i class="bi bi-calendar3"></i><span><strong>Consultations &amp; demos</strong>Meet the team or see a Silo product.</span></div>
+          <div><i class="bi bi-people"></i><span><strong>Partnerships</strong><a href="/partners#apply">Apply through the partner programme</a>.</span></div>
+          <div><i class="bi bi-headset"></i><span><strong>Existing clients</strong><a href="/support">Visit the support centre</a>.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps" id="enquiry">
+      <div class="site-container split" style="align-items:start">
+        <div class="reveal">
+          <span class="kicker">Project enquiry</span>
+          <h2 class="ps-title">Help us understand <em>the challenge.</em></h2>
+          <p class="ps-lead" style="margin:18px 0 24px">A useful first enquiry includes:</p>
+          <ul class="ticks"><li>Your organization and role</li><li>The problem or opportunity</li><li>Who will use the solution</li><li>Existing systems or infrastructure</li><li>Timing or operational constraints</li></ul>
+          <!-- Add verified office address, email, phone and hours here before launch. -->
+          <div class="info-list" style="margin-top:30px">
+            <div><i class="bi bi-clock"></i><span><strong>Response time</strong>We aim to reply to enquiries within one to two working days.</span></div>
+            <div><i class="bi bi-shield-lock"></i><span><strong>Your information is safe</strong>Please don't send passwords or payment details through this form.</span></div>
+          </div>
+        </div>
+        <form class="form-p f-stack reveal" name="project-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
+          <input type="hidden" name="form-name" value="project-enquiry">
+          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+          <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Organization<input name="organization" autocomplete="organization"></label></div>
+          <div class="f-row"><label>Email *<input type="email" name="email" required autocomplete="email"></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
+          <div class="f-row">
+            <label>Organization type<select name="industry"><option>Business / enterprise</option><option>Government institution</option><option>University / tertiary</option><option>School</option><option>NGO / non-profit</option><option>Faith-based organization</option><option>Healthcare</option><option>Agriculture</option><option>Other</option></select></label>
+            <label>What do you need? *<select name="service" id="enquiry-service" required><option value="">Choose one</option><option value="software">Custom software development</option><option>Website or portal</option><option>School / Office / Training Silo</option><option>Servers, cloud &amp; infrastructure</option><option>Networking</option><option>Cybersecurity</option><option>Process automation &amp; payments</option><option>Consultancy</option><option>Support &amp; managed IT</option><option value="co-development">Help with our in-house project</option></select></label>
+          </div>
+          <label>Project details *<textarea name="message" required placeholder="What do you want to achieve?"></textarea></label>
+          <label class="f-check"><input type="checkbox" name="consent" required> I agree that Stable Shield Solutions may use these details to respond, as described in the <a href="/privacy">privacy notice</a>.</label>
+          <button class="btn-p primary" type="submit">Send enquiry <i class="bi bi-send"></i></button>
+          <p class="f-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="ps alt" id="book">
+      <div class="site-container split" style="align-items:start">
+        <div class="reveal">
+          <span class="kicker">Book a meeting</span>
+          <h2 class="ps-title">Prefer to talk it through?</h2>
+          <p class="ps-lead" style="margin-top:18px">Request a 30-minute call or video meeting with our team. Pick a day that suits you and we'll confirm a time by email.</p>
+          <ol class="meet-steps">
+            <li><span><i class="bi bi-calendar-check"></i></span><div><strong>You pick a day</strong>Tell us your preferred date, time of day and topic.</div></li>
+            <li><span><i class="bi bi-envelope-check"></i></span><div><strong>We confirm by email</strong>Usually within one working day, with a calendar invite.</div></li>
+            <li><span><i class="bi bi-camera-video"></i></span><div><strong>We talk it through</strong>30 minutes on your goals, challenges and options. No sales pressure.</div></li>
+          </ol>
+          <div class="meet-types">
+            <div><i class="bi bi-camera-video"></i><strong>Video call</strong><small>Google Meet, Zoom or Teams</small></div>
+            <div><i class="bi bi-telephone"></i><strong>Phone call</strong><small>We'll call you</small></div>
+            <div><i class="bi bi-building"></i><strong>In person</strong><small>At your office or ours</small></div>
+          </div>
+        </div>
+        <form class="form-p f-stack reveal" name="meeting-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
+          <input type="hidden" name="form-name" value="meeting-request">
+          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+          <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Email *<input type="email" name="email" required autocomplete="email"></label></div>
+          <div class="f-row"><label>Preferred date *<input type="date" name="date" required></label><label>Preferred time<select name="time"><option>Morning</option><option>Afternoon</option><option>Any time</option></select></label></div>
+          <label>Meeting type<select name="type"><option>Video call</option><option>Phone call</option><option>In person</option></select></label>
+          <label>Topic<input name="topic" placeholder="e.g. School Silo demo, network upgrade"></label>
+          <button class="btn-p primary" type="submit">Request meeting <i class="bi bi-calendar-check"></i></button>
+          <p class="f-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="ps tight" id="co-development">
+      <div class="site-container">
+        <div class="collab reveal">
+          <div>
+            <span class="kicker">Co-development partnership</span>
+            <h2>Already building something in-house? Let's build it together.</h2>
+            <p>We partner with organizations on their existing in-house projects, joining your team to add capacity, unblock difficult work and take systems safely to production. You keep ownership; we bring the engineering, infrastructure and security depth.</p>
+            <div class="ph-actions">
+              <a class="btn-p primary" href="/partners?type=co-development#apply">Partner on your project <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+              <a class="btn-p ghost-light" href="/partners#models">How partnership works</a>
+            </div>
+          </div>
+          <ul>
+            <li><i class="bi bi-people" aria-hidden="true"></i><span><strong>Extend your team</strong>Developers, network and security engineers working alongside your staff.</span></li>
+            <li><i class="bi bi-lightning-charge" aria-hidden="true"></i><span><strong>Rescue or accelerate</strong>Review, stabilize and finish projects that have stalled or slipped.</span></li>
+            <li><i class="bi bi-shield-check" aria-hidden="true"></i><span><strong>Harden and launch</strong>Security reviews, hosting, integrations, training and handover.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
