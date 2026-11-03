@@ -23,7 +23,7 @@
       <div class="site-container">
         <div class="ps-head reveal"><div><span class="kicker">Partnership models</span><h2 class="ps-title">Choose how you'd like <em>to work with us.</em></h2></div><p>Pick the one that sounds most like you. If you're unsure, choose the closest and tell us more in the application. We'll guide you.</p></div>
         <div class="g g-2">
-          <article class="card-p reveal"><span class="ico red"><i class="bi bi-shop"></i></span><h3>Reseller &amp; referral partners</h3><p>Introduce or resell School Silo, Office Silo or Training Silo to organizations in your network or region.</p><ul class="ticks"><li>Sales and product training</li><li>Demo environments and materials</li><li>Referral or reseller margins</li></ul></article>
+          <article class="card-p reveal"><span class="ico red"><i class="bi bi-shop"></i></span><h3>Reseller &amp; referral partners</h3><p>Introduce or resell any of our 14 Silo products, from our flagship School Silo to Office, Revenue, Health and Automobile Silo, to organizations in your network or region.</p><ul class="ticks"><li>Sales and product training</li><li>Demo environments and materials</li><li>Referral or reseller margins</li></ul></article>
           <article class="card-p reveal"><span class="ico"><i class="bi bi-tools"></i></span><h3>Implementation partners</h3><p>Deliver deployments, data migration, training and first-line support alongside our team.</p><ul class="ticks"><li>Technical onboarding</li><li>Shared delivery playbooks</li><li>Escalation to our engineers</li></ul></article>
           <article class="card-p reveal"><span class="ico red"><i class="bi bi-plug"></i></span><h3>Technology partners</h3><p>Vendors of cloud, networking, security, payments or software that integrate with our solutions.</p><ul class="ticks"><li>Joint solution design</li><li>Integration support</li><li>Co-marketing opportunities</li></ul></article>
           <article class="card-p reveal"><span class="ico"><i class="bi bi-people"></i></span><h3>Co-development partners</h3><p>Organizations with in-house projects who want extra capacity, specialist skills or a team to finish and launch.</p><ul class="ticks"><li>Engineers embedded in your team</li><li>Architecture, security &amp; code reviews</li><li>You keep ownership of your project</li></ul></article>
@@ -72,9 +72,9 @@
               <div>
                 <legend>Which product or service is this for? *</legend>
                 <div class="choices">
-                  <label class="choice"><input type="checkbox" name="products" value="School Silo"><span><i class="bi bi-mortarboard"></i>School Silo</span></label>
-                  <label class="choice"><input type="checkbox" name="products" value="Office Silo"><span><i class="bi bi-briefcase"></i>Office Silo</span></label>
-                  <label class="choice"><input type="checkbox" name="products" value="Training Silo"><span><i class="bi bi-journal-check"></i>Training Silo</span></label>
+                  @for (item of siloProducts; track item.slug) {
+                    <label class="choice"><input type="checkbox" name="products" [value]="item.name" [checked]="item.name === prefillProduct"><span><i class="bi" [class]="item.icon"></i>{{ item.name }}</span></label>
+                  }
                   <label class="choice"><input type="checkbox" name="products" value="Custom software / services"><span><i class="bi bi-code-slash"></i>Custom software &amp; services</span></label>
                   <label class="choice"><input type="checkbox" name="products" value="Infrastructure & security"><span><i class="bi bi-hdd-network"></i>Infrastructure &amp; security</span></label>
                   <label class="choice"><input type="checkbox" name="products" value="My in-house project"><span><i class="bi bi-kanban"></i>Our in-house project</span></label>

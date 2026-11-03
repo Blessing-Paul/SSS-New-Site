@@ -1,3 +1,4 @@
+import { PRODUCTS } from '../../core/products.data';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 interface ReviewRow {
@@ -12,6 +13,8 @@ interface ReviewRow {
   templateUrl: './partners-page.html'
 })
 export class PartnersPageComponent implements OnInit {
+  readonly siloProducts = PRODUCTS;
+  prefillProduct = '';
   @ViewChild('partnerForm', { static: true }) private form!: ElementRef<HTMLFormElement>;
 
   currentStep = 0;
@@ -28,6 +31,7 @@ export class PartnersPageComponent implements OnInit {
 
     const product = params.get('product') ||
       (params.get('type') === 'co-development' ? 'My in-house project' : '');
+    this.prefillProduct = product;
     this.form.nativeElement.querySelectorAll<HTMLInputElement>('[name="products"]')
       .forEach((input) => { input.checked = input.value === product; });
 

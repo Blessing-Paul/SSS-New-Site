@@ -1,0 +1,150 @@
+@if (product) {
+<main [attr.data-cat]="product.category">
+    <section class="ph ph-product">
+      <div class="site-container">
+        <div class="ph-grid pd-grid">
+          <div class="pd-copy">
+            <ol class="crumbs">
+              <li><a href="/products">Products</a></li>
+              <li><a [href]="'/products#cat-' + category.slug">{{ category.short }}</a></li>
+              <li aria-current="page">{{ product.name }}</li>
+            </ol>
+            <div class="pd-badges">
+              <span class="pd-badge"><i class="bi" [class]="category.icon" aria-hidden="true"></i>Category {{ category.letter }} · {{ category.short }}</span>
+              @if (product.flagship) {<span class="pd-badge is-flagship"><i class="bi bi-star-fill" aria-hidden="true"></i>Our flagship</span>}
+            </div>
+            <h1><span class="pd-name">{{ product.name }}</span><em>{{ product.tagline }}</em></h1>
+            <p class="ph-lead">{{ product.overview[0] }}</p>
+            <div class="ph-actions">
+              <a class="btn-p primary" [href]="demoLink()">Book a free demo <i class="bi bi-calendar3"></i></a>
+              <a class="btn-p outline" href="#features">Explore the modules <i class="bi bi-arrow-down"></i></a>
+            </div>
+          </div>
+          <div class="pd-orbit" aria-hidden="true" [style.--n]="product.modules.length">
+            <span class="pd-orbit-ring"></span><span class="pd-orbit-ring is-inner"></span>
+            <div class="pd-orbit-core">
+              <span class="silo-ico"><i class="bi" [class]="product.icon"></i></span>
+              <strong>{{ product.name }}</strong>
+              <small>{{ product.modules.length }} connected modules</small>
+            </div>
+            @for (module of product.modules; track module.title; let i = $index) {
+              <div class="pd-orbit-node" [style.--i]="i"><span class="pd-orbit-dot"><i class="bi" [class]="module.icon"></i></span><span class="pd-orbit-label">{{ module.title }}</span></div>
+            }
+            <div class="pd-orbit-toast"><i class="bi bi-bell"></i><div><strong>{{ product.highlight.title }}</strong><small>{{ product.highlight.detail }}</small></div></div>
+          </div>
+        </div>
+        <dl class="pd-stats">
+          <div><dt>Core modules</dt><dd>{{ product.modules.length }}</dd></div>
+          <div><dt>User groups</dt><dd>{{ product.targetUsers.length }}</dd></div>
+          <div><dt>Integrations</dt><dd>{{ integrations.length || 'Standalone' }}</dd></div>
+          <div class="is-wide"><dt>Built for</dt><dd>{{ product.primaryIndustry }}</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="ps">
+      <div class="site-container split">
+        <div class="reveal">
+          <span class="kicker">Product overview</span>
+          <h2 class="ps-title">What {{ product.name }} <em>does for you.</em></h2>
+          @for (paragraph of product.overview; track $index; let first = $first) {
+            <p class="ps-lead" [style.margin-top.px]="first ? 18 : 14" [style.color]="first ? null : 'var(--p-head)'">{{ paragraph }}</p>
+          }
+        </div>
+        <div class="who reveal">
+          <h3>Made for</h3>
+          <ul class="ticks cols">
+            @for (user of product.targetUsers; track user) {<li>{{ user }}</li>}
+          </ul>
+          <a class="sector-link" href="/industries">See the sectors we serve <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps alt" id="features">
+      <div class="site-container">
+        <div class="ps-head reveal">
+          <div><span class="kicker">Core modules &amp; features</span><h2 class="ps-title">Everything in <em>{{ product.name }}.</em></h2></div>
+          <p>Every module is configured around your policies. In your demo we'll confirm exactly what's included for your setup.</p>
+        </div>
+        <div class="g g-3">
+          @for (module of product.modules; track module.title; let odd = $odd; let i = $index) {
+            <div class="card-p module-card reveal">
+              <span class="module-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <span class="ico" [class.red]="!odd"><i class="bi" [class]="module.icon"></i></span>
+              <h3>{{ module.title }}</h3>
+              <ul class="ticks">
+                @for (item of module.items; track item) {<li>{{ item }}</li>}
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="ps">
+      <div class="site-container">
+        <div class="ps-head reveal">
+          <div><span class="kicker">Industry applications</span><h2 class="ps-title">Where {{ product.name }} <em>fits best.</em></h2></div>
+          <p>Primary industry: <strong>{{ product.primaryIndustry }}</strong>. Also used across {{ product.otherSectors.toLowerCase() }}.</p>
+        </div>
+        <div class="industry-chips reveal">
+          @for (industry of product.industries; track industry) {<span><i class="bi bi-check2-circle" aria-hidden="true"></i>{{ industry }}</span>}
+        </div>
+      </div>
+    </section>
+
+    @if (integrations.length) {
+      <section class="ps alt hs-eco" id="integrations">
+        <div class="site-container">
+          <div class="ps-head reveal">
+            <div><span class="kicker">Better together</span><h2 class="ps-title">Connects with <em>the rest of the Silo family.</em></h2></div>
+            <p>{{ product.name }} works perfectly on its own, and shares information with these products where your processes overlap.</p>
+          </div>
+          <div class="flow-grid">
+            @for (link of integrations; track link.title) {
+              <article class="flow-card reveal">
+                <div class="flow-chain">
+                  <span class="flow-node is-self" [attr.data-cat]="product.category"><i class="bi" [class]="product.icon" aria-hidden="true"></i>{{ product.name }}</span>
+                  @for (partner of partners(link); track partner.slug) {
+                    <span class="flow-plus" aria-hidden="true"><i class="bi bi-plus-lg"></i></span>
+                    <a class="flow-node" [href]="'/products/' + partner.slug" [attr.data-cat]="partner.category"><i class="bi" [class]="partner.icon" aria-hidden="true"></i>{{ partner.name }}</a>
+                  }
+                </div>
+                <h3>{{ link.title }}</h3>
+                <p>{{ link.description }}</p>
+              </article>
+            }
+          </div>
+        </div>
+      </section>
+    }
+
+    <section class="ps">
+      <div class="site-container">
+        <div class="ps-head reveal"><div><span class="kicker">Getting started</span><h2 class="ps-title">From demo to go-live, <em>we do the heavy lifting.</em></h2></div><p>You won't be left to figure it out alone. Here's how we get you up and running.</p></div>
+        <ol class="steps"><li class="reveal"><h3>Map your processes</h3><p>We document how work moves in your organisation today.</p></li><li class="reveal"><h3>Configure</h3><p>Structure, roles, charges and workflows set up for you.</p></li><li class="reveal"><h3>Migrate &amp; connect</h3><p>Records imported; payments, SMS and other Silos connected.</p></li><li class="reveal"><h3>Train &amp; support</h3><p>Your team trained; we stay on hand as adoption grows.</p></li></ol>
+      </div>
+    </section>
+
+    <section class="ps tight">
+      <div class="site-container">
+        <div class="cta-band reveal"><div><h2>Ready to see {{ product.name }} in action?</h2><p>A free 30–45 minute demo built around your own scenarios.</p></div><div class="ph-actions"><a class="btn-p primary" [href]="demoLink()">Book a demo</a><a class="btn-p outline" [href]="'/partners?type=reseller&product=' + product.name + '#apply'">Resell {{ product.name }}</a></div></div>
+      </div>
+    </section>
+
+    <section class="ps tight">
+      <div class="site-container">
+        <div class="ps-head reveal">
+          <div><span class="kicker">{{ siblings.length ? 'Also in ' + category.short : 'Explore the Silo family' }}</span><h2 class="ps-title">{{ siblings.length ? 'Related products' : 'Explore other products' }}</h2></div>
+          <p><a class="sector-link" href="/products">View all Silo products <i class="bi bi-arrow-right"></i></a></p>
+        </div>
+        <div class="g g-3">
+          @for (item of related; track item.slug) {
+            <a class="card-p reveal" [href]="'/products/' + item.slug"><span class="ico"><i class="bi" [class]="item.icon"></i></span><h3>{{ item.name }}</h3><p>{{ item.summary }}</p><span class="more">Explore {{ item.name }} <i class="bi bi-arrow-right"></i></span></a>
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+}

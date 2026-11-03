@@ -64,7 +64,7 @@ export class App implements OnInit, OnDestroy {
     if (destination.origin !== window.location.origin) return;
     const path = destination.pathname.replace(/\/$/, '');
     const isRoute = path === '' ||
-      /^\/(?:index-copy|about|accessibility|apply|careers|contact|industries|login|office-silo|partners|portal|privacy|products|resources|school-silo|services|support|terms|training-silo|unauthorized)$/.test(path) ||
+      /^\/(?:index-copy|about|accessibility|apply|careers|contact|industries|login|office-silo|partners|portal|privacy|products(?:\/[a-z-]+)?|resources|school-silo|services|support|terms|training-silo|unauthorized)$/.test(path) ||
       /\.html$/i.test(path);
     if (!isRoute) return;
     if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;

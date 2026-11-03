@@ -2,13 +2,16 @@
     <!-- ================= HERO ================= -->
     <section class="hero home-hero" aria-label="Introduction">
       <div class="hero-photo" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&amp;fit=crop&amp;w=2200&amp;q=85" alt="" fetchpriority="high">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&amp;fit=crop&amp;w=2200&amp;q=80"
+             srcset="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&amp;fit=crop&amp;w=800&amp;q=75 800w, https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&amp;fit=crop&amp;w=1400&amp;q=78 1400w, https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&amp;fit=crop&amp;w=2200&amp;q=80 2200w"
+             sizes="100vw" alt="" fetchpriority="high">
         <span class="hero-photo-shade"></span>
       </div>
       <div class="site-container hero-frame-content">
         <div class="hero-copy">
           <span class="hero-eyebrow"><span></span> Technology for a more connected world</span>
           <h1>Beyond Technology,<br>We Build Trust</h1>
+          <p class="hero-sub">You focus on growing your business. We keep your systems secure, connected and running, with dependable IT support for businesses across Nigeria.</p>
           <div class="hero-actions">
             <a class="site-btn btn-red" href="/contact">Get in touch <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
             <a class="site-btn btn-light" href="/contact#book">Book a meeting <i class="bi bi-calendar3" aria-hidden="true"></i></a>
@@ -16,8 +19,8 @@
         </div>
         <div class="hero-intro">
           <a class="hero-approach-link" href="#approach">
-            <span class="hero-approach-icon"><i class="bi bi-play-fill" aria-hidden="true"></i></span>
-            <span>Explore our approach</span>
+            <span class="hero-approach-icon"><i class="bi bi-arrow-down" aria-hidden="true"></i></span>
+            <span>See how we work</span>
           </a>
           <p>We bring software, security and connected systems together to make everyday work simpler and more dependable for organizations moving forward.</p>
         </div>
@@ -37,7 +40,7 @@
           <span class="hero-rating-brand"><i class="bi bi-shield-check" aria-hidden="true"></i> Stable Shield</span>
         </div>
         <div class="hero-proof">
-          <p><span></span> Trusted by 500+ happy clients worldwide.</p>
+          <p><span></span> Trusted by 500+ businesses across Nigeria and beyond.</p>
           <div class="hero-logos" aria-label="Clients">
             <div class="hero-logos-track">
               <span><i class="bi bi-mortarboard-fill"></i> EduCore</span><span><i class="bi bi-heart-pulse-fill"></i> ValueCare</span><span><i class="bi bi-bank2"></i> Finlink</span><span><i class="bi bi-buildings-fill"></i> Metrohub</span><span><i class="bi bi-globe2"></i> Netwave</span>
@@ -151,37 +154,66 @@
             <span class="hs-kicker">The Silo product family</span>
             <h2 class="hs-title">Purpose-built platforms.<br><span class="hs-grad">Simpler everyday operations.</span></h2>
           </div>
-          <p>Specialized products that bring essential organizational processes into one connected environment.</p>
+          <p>14 products across seven categories, led by our flagship School Silo, bringing essential organisational processes into one connected environment.</p>
         </div>
         <div class="silo-grid">
-          <a class="silo-card silo-school reveal" href="/school-silo">
-            <div class="silo-top"><span class="silo-mark">S</span><span class="silo-pill">Education · Flagship</span></div>
-            <h3>School Silo</h3>
-            <p class="silo-tag">The connected school management platform.</p>
-            <p>School administration, academics, communication, finance and reporting together, across early years,
-              primary and secondary.</p>
-            <div class="silo-tags"><span>Admissions</span><span>Attendance</span><span>Fees</span><span>Results</span><span>Parent portal</span></div>
+          <a class="silo-card silo-flagship reveal" href="/products/school-silo">
+            <div class="silo-top"><span class="silo-mark">A</span><span class="silo-pill">Schools · Our flagship</span></div>
+            <div class="silo-flagship-body">
+              <div>
+                <h3>School Silo</h3>
+                <p class="silo-tag">Run your whole school from one place.</p>
+                <p>Admissions, classes, results, fees and parent communication together, from the creche check-in to the final SS3 report card.</p>
+              </div>
+              <div class="silo-tags"><span>Admissions</span><span>Report cards</span><span>Fees &amp; payments</span><span>Parent portal</span><span>CBT exams</span><span>Early years</span></div>
+            </div>
             <span class="silo-link">Discover School Silo <i class="bi bi-arrow-right"></i></span>
           </a>
-          <a class="silo-card silo-office reveal" href="/office-silo">
-            <div class="silo-top"><span class="silo-mark">O</span><span class="silo-pill">Workplace</span></div>
-            <h3>Office Silo</h3>
-            <p class="silo-tag">A smarter way to manage work.</p>
-            <p>A proposed workplace platform for administration, staff, documents, approvals, tasks and reporting.</p>
-            <div class="silo-tags"><span>Operations</span><span>Staff</span><span>Documents</span><span>Approvals</span></div>
-            <span class="silo-link">Explore Office Silo <i class="bi bi-arrow-right"></i></span>
-          </a>
-          <a class="silo-card silo-training reveal" href="/training-silo">
-            <div class="silo-top"><span class="silo-mark">T</span><span class="silo-pill">Learning</span></div>
-            <h3>Training Silo</h3>
-            <p class="silo-tag">Learning and development in one place.</p>
-            <p>A proposed learning platform for courses, participants, assessments, certificates and progress.</p>
-            <div class="silo-tags"><span>Courses</span><span>Enrolment</span><span>Assessments</span><span>Certificates</span></div>
-            <span class="silo-link">Explore Training Silo <i class="bi bi-arrow-right"></i></span>
-          </a>
+          <div class="silo-card reveal">
+            <div class="silo-top"><span class="silo-mark">B</span><span class="silo-pill">Business &amp; Commerce · 3 products</span></div>
+            <h3>Commerce, property &amp; cooperatives</h3>
+            <p>Run sales, stock, estates, markets, savings and loans.</p>
+            <div class="silo-tags"><a href="/products/business-silo">Business Silo</a><a href="/products/cooperative-silo">Cooperative Silo</a><a href="/products/mep-silo">MEP Silo</a></div>
+            <a class="silo-link" href="/products#cat-business">Explore the category <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="silo-card reveal">
+            <div class="silo-top"><span class="silo-mark">C</span><span class="silo-pill">Organisational · 2 products</span></div>
+            <h3>Offices &amp; campuses</h3>
+            <p>Administration, workflows, documents and campus operations.</p>
+            <div class="silo-tags"><a href="/products/office-silo">Office Silo</a><a href="/products/office-silo-campus">Office Silo Campus</a></div>
+            <a class="silo-link" href="/products#cat-organisational">Explore the category <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="silo-card reveal">
+            <div class="silo-top"><span class="silo-mark">D</span><span class="silo-pill">Identity &amp; Finance · 3 products</span></div>
+            <h3>Identity, revenue &amp; payments</h3>
+            <p>Verify people, assess and collect revenue, reconcile payments.</p>
+            <div class="silo-tags"><a href="/products/identity-silo">Identity Silo</a><a href="/products/revenue-silo">Revenue Silo</a><a href="/products/payment-silo">Payment Silo</a></div>
+            <a class="silo-link" href="/products#cat-identity-finance">Explore the category <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="silo-card reveal">
+            <div class="silo-top"><span class="silo-mark">E</span><span class="silo-pill">Learning &amp; Assessment · 2 products</span></div>
+            <h3>Training, exams &amp; certificates</h3>
+            <p>Deliver courses, run computer-based exams and certify learners.</p>
+            <div class="silo-tags"><a href="/products/training-silo">Training Silo</a><a href="/products/exam-silo">Exam Silo</a></div>
+            <a class="silo-link" href="/products#cat-education">Explore the category <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="silo-card reveal">
+            <div class="silo-top"><span class="silo-mark">F</span><span class="silo-pill">Membership · 1 product</span></div>
+            <h3>Members &amp; communities</h3>
+            <p>Registration, dues, renewals, digital ID and engagement.</p>
+            <div class="silo-tags"><a href="/products/membership-silo">Membership Silo</a></div>
+            <a class="silo-link" href="/products#cat-membership">Explore the category <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="silo-card reveal">
+            <div class="silo-top"><span class="silo-mark">G</span><span class="silo-pill">Specialised Industry · 2 products</span></div>
+            <h3>Healthcare &amp; automotive</h3>
+            <p>Patients, labs and billing; vehicles, fleets and maintenance.</p>
+            <div class="silo-tags"><a href="/products/health-silo">Health Silo</a><a href="/products/automobile-silo">Automobile Silo</a></div>
+            <a class="silo-link" href="/products#cat-specialised">Explore the category <i class="bi bi-arrow-right"></i></a>
+          </div>
         </div>
-        <p class="hs-note hs-note-dark"><i class="bi bi-info-circle"></i> Office Silo and Training Silo are proposed
-          concepts; confirm current availability before publishing specific feature claims.</p>
+        <p class="hs-note hs-note-dark"><i class="bi bi-diagram-3"></i> Every Silo works on its own, and connects with the others where your processes overlap.
+          <a href="/products#ecosystem" style="color:#fff;text-decoration:underline">See how they connect</a> or <a href="/products" style="color:#fff;text-decoration:underline">view all 14 products</a>.</p>
       </div>
     </section>
 
@@ -264,13 +296,13 @@
         </div>
         <div class="g g-4">
           <a class="card-p reveal" href="/services"><span class="ico red"><i class="bi bi-kanban"></i></span><h3>End-to-end projects</h3><p>We scope, build, deploy and hand over a complete solution.</p><span class="more">Explore services <i class="bi bi-arrow-right"></i></span></a>
-          <a class="card-p reveal" href="/products"><span class="ico"><i class="bi bi-grid-3x3-gap"></i></span><h3>Silo products</h3><p>Ready platforms for schools, offices and training, configured for you.</p><span class="more">See products <i class="bi bi-arrow-right"></i></span></a>
+          <a class="card-p reveal" href="/products"><span class="ico"><i class="bi bi-grid-3x3-gap"></i></span><h3>Silo products</h3><p>14 ready platforms for schools, business, administration, finance, learning, membership, health and transport.</p><span class="more">See products <i class="bi bi-arrow-right"></i></span></a>
           <a class="card-p reveal" href="/partners?type=co-development#apply"><span class="ico red"><i class="bi bi-people"></i></span><h3>Co-development</h3><p>Our engineers join your in-house team to accelerate or rescue a project.</p><span class="more">Partner on a project <i class="bi bi-arrow-right"></i></span></a>
           <a class="card-p reveal" href="/support"><span class="ico"><i class="bi bi-headset"></i></span><h3>Managed support</h3><p>Maintenance, monitoring and help desk under a clear agreement.</p><span class="more">Support centre <i class="bi bi-arrow-right"></i></span></a>
         </div>
         <div class="stats reveal" style="margin-top:28px">
           <div><strong>13+</strong><span>Service areas under one roof</span></div>
-          <div><strong>3</strong><span>Proprietary Silo platforms</span></div>
+          <div><strong>14</strong><span>Proprietary Silo platforms</span></div>
           <div><strong>8+</strong><span>Sectors served</span></div>
           <div><strong>5</strong><span>Step delivery method, start to support</span></div>
         </div>
@@ -383,9 +415,9 @@
               times, coverage and service levels are confirmed in the applicable agreement.</p>
           </details>
           <details>
-            <summary>Are all Silo product features available now?</summary>
-            <p>Current modules and release status should be confirmed with the company. Office Silo and Training Silo
-              are proposed concepts, not final product specifications.</p>
+            <summary>Which Silo product is right for us?</summary>
+            <p>We have 14 Silo products across seven categories, from our flagship School Silo to Business, Office, Revenue, Payment, Health
+              and Automobile Silo. Use one on its own or connect several. <a href="/products">Compare the products</a> or book a demo and we'll help you choose.</p>
           </details>
         </div>
       </div>
@@ -439,7 +471,7 @@
                 <option>Servers, cloud or infrastructure</option>
                 <option>Cybersecurity or networking</option>
                 <option>Digital transformation / integrations</option>
-                <option>Office Silo / Training Silo enquiry</option>
+                <option>Silo product enquiry (any of our 14 products)</option>
                 <option>IT consulting, training or support</option>
                 <option>Partnership or other enquiry</option>
               </select></label>

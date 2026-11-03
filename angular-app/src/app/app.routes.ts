@@ -53,11 +53,6 @@ export const routes: Routes = [
     data: { title: 'Access Denied | Stable Shield Solutions', description: 'You are not authorized to access this page.' }
   },
   {
-    path: 'office-silo',
-    loadComponent: () => import('./pages/office-silo/office-silo-page').then((page) => page.OfficeSiloPageComponent),
-    data: { title: 'Office Silo', description: " Stable Shield Solutions|Office Silo: workplace management software by Stable Shield Solutions. Features, who it's for, how we set it up and how to book a demo." }
-  },
-  {
     path: 'partners',
     loadComponent: () => import('./pages/partners/partners-page').then((page) => page.PartnersPageComponent),
     data: { title: 'Partner With Us', description: ' Stable Shield Solutions|Become a Stable Shield partner: resellers, implementation partners, technology partners and co-development partners for in-house projects. Apply online in five steps.' }
@@ -75,18 +70,20 @@ export const routes: Routes = [
   {
     path: 'products',
     loadComponent: () => import('./pages/products/products-page').then((page) => page.ProductsPageComponent),
-    data: { title: 'Products', description: ' School Silo, Office Silo & Training Silo | Stable Shield Solutions|Ready-to-deploy platforms for schools, offices and training providers: School Silo, Office Silo and Training Silo. Explore features and book a demo.' }
+    data: { title: 'Silo Products | Stable Shield Solutions', description: '14 Silo products, led by our flagship School Silo, across schools, business, administration, identity, revenue, payments, learning, membership, healthcare and automotive. Explore features, integrations and book a demo.' }
   },
+  {
+    path: 'products/:slug',
+    loadComponent: () => import('./pages/product-detail/product-detail-page').then((page) => page.ProductDetailPageComponent)
+  },
+  { path: 'office-silo', redirectTo: 'products/office-silo', pathMatch: 'full' },
+  { path: 'training-silo', redirectTo: 'products/training-silo', pathMatch: 'full' },
   {
     path: 'resources',
     loadComponent: () => import('./pages/resources/resources-page').then((page) => page.ResourcesPageComponent),
     data: { title: 'Insights & Resources', description: ' Stable Shield Solutions|Practical guidance on cybersecurity, digital transformation, infrastructure, education technology and enterprise systems.' }
   },
-  {
-    path: 'school-silo',
-    loadComponent: () => import('./pages/school-silo/school-silo-page').then((page) => page.SchoolSiloPageComponent),
-    data: { title: 'School Silo', description: " Stable Shield Solutions|School Silo: school management software by Stable Shield Solutions. Features, who it's for, how we set it up and how to book a demo." }
-  },
+  { path: 'school-silo', redirectTo: 'products/school-silo', pathMatch: 'full' },
   {
     path: 'services',
     loadComponent: () => import('./pages/services/services-page').then((page) => page.ServicesPageComponent),
@@ -102,11 +99,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/terms/terms-page').then((page) => page.TermsPageComponent),
     data: { title: 'Terms of Use', description: ' Stable Shield Solutions|Terms for using the Stable Shield Solutions website.' }
   },
-  {
-    path: 'training-silo',
-    loadComponent: () => import('./pages/training-silo/training-silo-page').then((page) => page.TrainingSiloPageComponent),
-    data: { title: 'Training Silo', description: " Stable Shield Solutions|Training Silo: learning management software by Stable Shield Solutions. Features, who it's for, how we set it up and how to book a demo." }
-  },
   { path: 'index.html', redirectTo: '', pathMatch: 'full' },
   { path: 'index-copy.html', redirectTo: 'index-copy', pathMatch: 'full' },
   { path: 'index copy.html', redirectTo: 'index-copy', pathMatch: 'full' },
@@ -115,17 +107,17 @@ export const routes: Routes = [
   { path: 'careers.html', redirectTo: 'careers', pathMatch: 'full' },
   { path: 'contact.html', redirectTo: 'contact', pathMatch: 'full' },
   { path: 'industries.html', redirectTo: 'industries', pathMatch: 'full' },
-  { path: 'office-silo.html', redirectTo: 'office-silo', pathMatch: 'full' },
+  { path: 'office-silo.html', redirectTo: 'products/office-silo', pathMatch: 'full' },
   { path: 'partners.html', redirectTo: 'partners', pathMatch: 'full' },
   { path: 'portal.html', redirectTo: 'portal', pathMatch: 'full' },
   { path: 'privacy.html', redirectTo: 'privacy', pathMatch: 'full' },
   { path: 'products.html', redirectTo: 'products', pathMatch: 'full' },
   { path: 'resources.html', redirectTo: 'resources', pathMatch: 'full' },
-  { path: 'school-silo.html', redirectTo: 'school-silo', pathMatch: 'full' },
+  { path: 'school-silo.html', redirectTo: 'products/school-silo', pathMatch: 'full' },
   { path: 'services.html', redirectTo: 'services', pathMatch: 'full' },
   { path: 'support.html', redirectTo: 'support', pathMatch: 'full' },
   { path: 'terms.html', redirectTo: 'terms', pathMatch: 'full' },
-  { path: 'training-silo.html', redirectTo: 'training-silo', pathMatch: 'full' },
+  { path: 'training-silo.html', redirectTo: 'products/training-silo', pathMatch: 'full' },
   {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found-page').then((page) => page.NotFoundPageComponent),

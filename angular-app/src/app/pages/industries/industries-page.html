@@ -4,7 +4,7 @@
         <div>
           <span class="kicker">Industries we serve</span>
           <h1>We already speak <em>your sector's language.</em></h1>
-          <p class="ph-lead">A school, a ministry, a clinic and a cooperative all run differently. Pick your sector below to see the problems we solve for organizations like yours, and how we'd approach yours.</p>
+          <p class="ph-lead">A school, a ministry, a clinic and a cooperative all run differently. Pick your sector below to see the problems we solve for organizations like yours, the Silo products that fit, and how they connect.</p>
           <div class="ph-actions">
             <a class="btn-p primary" href="/contact">Talk to a sector specialist <i class="bi bi-arrow-up-right"></i></a>
             <a class="btn-p outline" href="#sectors">Find your sector</a>
@@ -12,7 +12,7 @@
         </div>
         <div class="ph-media">
           <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Team collaborating on laptops" width="1200" height="960">
-          <div class="ph-float"><i class="bi bi-buildings"></i><div><strong>10 sectors</strong><small>Public, private, education and mission-driven organizations.</small></div></div>
+          <div class="ph-float"><i class="bi bi-buildings"></i><div><strong>11 sectors · 14 products</strong><small>Public, private, education and mission-driven organizations.</small></div></div>
         </div>
       </div>
     </section>
@@ -22,12 +22,16 @@
         <div class="g g-4">
           <a class="card-p reveal" href="#government"><span class="ico red"><i class="bi bi-bank"></i></span><h3>Government</h3><p>Citizen services, records and workflows.</p></a>
           <a class="card-p reveal" href="#universities"><span class="ico"><i class="bi bi-building"></i></span><h3>Universities</h3><p>Admissions, SIS, exams and campus networks.</p></a>
-          <a class="card-p reveal" href="#education"><span class="ico red"><i class="bi bi-mortarboard"></i></span><h3>Schools</h3><p>School Silo, portals and e-learning.</p></a>
+          <a class="card-p reveal" href="#education"><span class="ico red"><i class="bi bi-mortarboard"></i></span><h3>Schools</h3><p>School Silo, exams and e-learning.</p></a>
           <a class="card-p reveal" href="#faith"><span class="ico"><i class="bi bi-house-heart"></i></span><h3>Faith-based</h3><p>Parish, diocese and ministry administration.</p></a>
           <a class="card-p reveal" href="#ngos"><span class="ico red"><i class="bi bi-globe-europe-africa"></i></span><h3>NGOs</h3><p>Beneficiaries, M&amp;E and donor reporting.</p></a>
           <a class="card-p reveal" href="#healthcare"><span class="ico"><i class="bi bi-heart-pulse"></i></span><h3>Healthcare</h3><p>Patients, appointments, billing and records.</p></a>
           <a class="card-p reveal" href="#agriculture"><span class="ico red"><i class="bi bi-flower1"></i></span><h3>Agriculture</h3><p>Farmers, inputs, produce and cooperatives.</p></a>
           <a class="card-p reveal" href="#enterprise"><span class="ico"><i class="bi bi-briefcase"></i></span><h3>Businesses</h3><p>CRM, ERP, inventory and automation.</p></a>
+          <a class="card-p reveal" href="#associations"><span class="ico red"><i class="bi bi-people"></i></span><h3>Associations</h3><p>Members, dues, CPD and cooperatives.</p></a>
+          <a class="card-p reveal" href="#property"><span class="ico"><i class="bi bi-houses"></i></span><h3>Real estate &amp; markets</h3><p>Properties, tenancies, stalls and levies.</p></a>
+          <a class="card-p reveal" href="#transport"><span class="ico red"><i class="bi bi-truck"></i></span><h3>Transport &amp; fleet</h3><p>Vehicles, drivers and maintenance.</p></a>
+          <a class="card-p reveal" href="#ecosystems"><span class="ico"><i class="bi bi-diagram-3"></i></span><h3>Connected products</h3><p>See how the Silos combine by sector.</p></a>
         </div>
       </div>
     </section>
@@ -41,6 +45,12 @@
             <h2>Serve citizens faster, with records you can trust.</h2>
             <p>If your agency still relies on paper files, long queues and manual approvals, we help you move services online while keeping control, accountability and proper information governance.</p>
             <ul class="ticks cols"><li>Citizen service portals</li><li>Online applications &amp; permits</li><li>Records management</li><li>Interdepartmental approvals</li><li>Complaints &amp; case tracking</li><li>Revenue &amp; fee collection</li><li>Management dashboards</li><li>Secure infrastructure &amp; backup</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('government'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -51,6 +61,12 @@
             <h2>Connect admissions, academics and students.</h2>
             <p>From application to graduation, your students, staff and departments need systems that talk to each other. We can integrate with what you have, so you don't replace everything at once.</p>
             <ul class="ticks cols"><li>Admissions portals</li><li>Student information systems</li><li>Course registration</li><li>Exams &amp; results</li><li>Transcript requests</li><li>Fee &amp; payment integration</li><li>Hostel management</li><li>Campus networks &amp; servers</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('universities'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -61,6 +77,12 @@
             <h2>Less paperwork for teachers, more clarity for parents.</h2>
             <p>Whether you run one school or a group of them, School Silo and our education services keep admissions, results, fees and communication organized, so your team can focus on teaching.</p>
             <ul class="ticks cols"><li>School Silo management</li><li>Parent &amp; student portals</li><li>Online admissions</li><li>Computer-based testing</li><li>E-learning</li><li>School Wi-Fi &amp; networks</li><li>School websites</li><li>Staff training</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('education'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -71,6 +93,12 @@
             <h2>Tools that respect your mission and structure.</h2>
             <p>Parishes, dioceses and ministries run schools, hospitals and outreach as well as worship. We build systems that fit your governance, approvals, financial controls and confidentiality needs.</p>
             <ul class="ticks cols"><li>Parish &amp; membership records</li><li>Multi-branch administration</li><li>Contributions &amp; donations</li><li>Events &amp; programmes</li><li>Finance reporting</li><li>Archives &amp; documents</li><li>Websites &amp; portals</li><li>Retreat registration</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('faith'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -81,6 +109,12 @@
             <h2>Prove your impact with data you can rely on.</h2>
             <p>Donors want evidence and your field teams need simple tools. We set up beneficiary records, field data collection and M&amp;E dashboards around your own indicators and reporting templates.</p>
             <ul class="ticks cols"><li>Beneficiary registration</li><li>Field data collection</li><li>Programme management</li><li>Grant &amp; budget tracking</li><li>M&amp;E dashboards</li><li>Donor reporting</li><li>Distribution tracking</li><li>Location-based reporting</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('ngos'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -91,6 +125,12 @@
             <h2>Spend more time on patients, less on paperwork.</h2>
             <p>Clinics and hospitals need appointments, records and billing that just work, with strict privacy and access control. We design around your clinical workflows, not the other way round.</p>
             <ul class="ticks cols"><li>Patient registration</li><li>Appointments</li><li>Electronic patient records</li><li>Billing &amp; payments</li><li>Pharmacy &amp; inventory</li><li>Laboratory workflows</li><li>Staff scheduling</li><li>Backup &amp; disaster recovery</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('healthcare'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -101,6 +141,12 @@
             <h2>From farm records to market, all in view.</h2>
             <p>Cooperatives, processors and agricultural programmes juggle farmers, inputs, produce and payments across wide areas. We give your field teams simple tools and your managers a clear picture.</p>
             <ul class="ticks cols"><li>Farmer &amp; cooperative registration</li><li>Farm &amp; field records</li><li>Input distribution</li><li>Produce aggregation</li><li>Warehouse &amp; stock</li><li>Farm-to-market tracking</li><li>Subsidy programmes</li><li>Payments &amp; reconciliation</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('agriculture'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -111,6 +157,12 @@
             <h2>Systems that grow with your business.</h2>
             <p>Replace scattered spreadsheets and tools with connected systems for sales, operations and finance, one step at a time, starting with what hurts most.</p>
             <ul class="ticks cols"><li>Websites &amp; e-commerce</li><li>CRM &amp; customer service</li><li>ERP &amp; accounting integrations</li><li>HR management</li><li>Inventory &amp; procurement</li><li>Office Silo workflows</li><li>Cloud &amp; networks</li><li>Security assessments</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('enterprise'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
@@ -121,9 +173,71 @@
             <h2>Keep members engaged and dues up to date.</h2>
             <p>Professional bodies and cooperatives need easy registration, renewals and communication. We build member portals that save your secretariat hours every week.</p>
             <ul class="ticks cols"><li>Registration &amp; renewal</li><li>Member directories</li><li>Dues &amp; subscriptions</li><li>Event registration</li><li>Certification records</li><li>Digital ID verification</li><li>Branch administration</li><li>Member portals</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('associations'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
             <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
+        <article class="sector reveal" id="property">
+          <div class="sector-media"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&amp;fit=crop&amp;w=1100&amp;h=820&amp;q=80" alt="Keys handed over for a new property" loading="lazy" width="1100" height="820"><span class="sector-badge"><i class="bi bi-houses"></i></span></div>
+          <div class="sector-body">
+            <span class="kicker">Real estate, estates &amp; markets</span>
+            <h2>Every unit, stall and rent payment accounted for.</h2>
+            <p>Estate managers, landlords and market authorities juggle allocations, tenancies, levies and collections. We bring properties, occupants and payments into one connected view.</p>
+            <ul class="ticks cols"><li>Property &amp; unit registers</li><li>Tenancy &amp; lease records</li><li>Rent schedules &amp; renewals</li><li>Shop &amp; stall allocation</li><li>Market fees &amp; levies</li><li>Service &amp; maintenance</li><li>Occupancy reports</li><li>Payment reconciliation</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('property'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
+            <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+        <article class="sector reveal" id="transport">
+          <div class="sector-media"><img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&amp;fit=crop&amp;w=1100&amp;h=820&amp;q=80" alt="Trucks and containers at a logistics yard" loading="lazy" width="1100" height="820"><span class="sector-badge"><i class="bi bi-truck"></i></span></div>
+          <div class="sector-body">
+            <span class="kicker">Transport, fleet &amp; automotive</span>
+            <h2>Know where every vehicle stands.</h2>
+            <p>Dealerships, fleet operators, workshops and regulators need accurate vehicle records, maintenance history and document expiry tracking. We keep vehicles, drivers and charges organised.</p>
+            <ul class="ticks cols"><li>Vehicle registration &amp; records</li><li>Fleet allocation</li><li>Maintenance schedules</li><li>Driver management</li><li>Insurance &amp; inspection</li><li>Document expiry alerts</li><li>Sales &amp; rental records</li><li>Vehicle charges &amp; payments</li></ul>
+            <div class="sector-products">
+              <span class="sector-products-label">Recommended Silo products</span>
+              @for (item of productsFor('transport'); track item.slug) {
+                <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+              }
+            </div>
+            <a class="sector-link" href="/contact">Talk to us about your organization <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="ps hs-eco" id="ecosystems">
+      <div class="site-container">
+        <div class="ps-head reveal">
+          <div><span class="kicker">Connected products by sector</span><h2 class="ps-title">How our products <em>work together for you.</em></h2></div>
+          <p>Each Silo solves one job well. Combined, they cover a whole organisation. Here is how organisations in each sector typically connect them.</p>
+        </div>
+        <div class="eco-scenarios">
+          @for (eco of ecosystems; track eco.sector; let odd = $odd) {
+            <article class="flow-card eco-scenario reveal">
+              <div class="eco-scenario-head"><span class="ico" [class.red]="!odd"><i class="bi" [class]="eco.icon" aria-hidden="true"></i></span><h3>{{ eco.sector }}</h3></div>
+              <p>{{ eco.scenario }}</p>
+              <div class="flow-chain">
+                @for (item of products(eco.products); track item.slug; let last = $last) {
+                  <a class="flow-node" [href]="'/products/' + item.slug" [attr.data-cat]="item.category"><i class="bi" [class]="item.icon" aria-hidden="true"></i>{{ item.name }}</a>
+                  @if (!last) {<span class="flow-plus" aria-hidden="true"><i class="bi bi-plus-lg"></i></span>}
+                }
+              </div>
+            </article>
+          }
+        </div>
+        <p class="note reveal"><i class="bi bi-info-circle" aria-hidden="true"></i><span>Every product also works on its own. <a class="sector-link" href="/products#ecosystem" style="display:inline">See all integration pathways</a>.</span></p>
       </div>
     </section>
 
@@ -131,7 +245,7 @@
       <div class="site-container">
         <div class="ps-head reveal"><div><span class="kicker">And beyond</span><h2 class="ps-title">Other sectors <em>we support.</em></h2></div><p>If your sector isn't listed, that's fine. Tell us how your organization works and we'll design around it.</p></div>
         <div class="tags reveal" style="gap:10px">
-          <span>Retail &amp; wholesale</span><span>Hospitality</span><span>Logistics &amp; distribution</span><span>Transport &amp; fleet</span><span>Real estate</span><span>Legal &amp; professional services</span><span>Manufacturing</span><span>Training providers</span><span>Public utilities</span>
+          <span>Retail &amp; wholesale</span><span>Logistics &amp; distribution</span><span>Hospitality &amp; tourism</span><span>Legal &amp; professional services</span><span>Manufacturing</span><span>Training providers</span><span>Public utilities</span>
         </div>
       </div>
     </section>

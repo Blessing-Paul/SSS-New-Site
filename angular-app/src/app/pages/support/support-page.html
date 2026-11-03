@@ -46,7 +46,7 @@
           <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Organization *<input name="organization" required autocomplete="organization"></label></div>
           <div class="f-row"><label>Email *<input type="email" name="email" required autocomplete="email"></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
           <div class="f-row">
-            <label>System *<select name="system" required><option value="">Choose one</option><option>School Silo</option><option>Office Silo</option><option>Training Silo</option><option>Custom application</option><option>Website</option><option>Server / network</option><option>Other</option></select></label>
+            <label>System *<select name="system" required><option value="">Choose one</option>@for (item of siloProducts; track item.slug) {<option>{{ item.name }}</option>}<option>Custom application</option><option>Website</option><option>Server / network</option><option>Other</option></select></label>
             <label>Priority<select name="priority"><option>Normal</option><option>High</option><option>Critical</option></select></label>
           </div>
           <label>Describe the issue *<textarea name="message" required placeholder="What happened, steps to reproduce, error messages"></textarea></label>

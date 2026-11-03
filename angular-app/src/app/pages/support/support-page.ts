@@ -1,3 +1,4 @@
+import { PRODUCTS } from '../../core/products.data';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,4 +6,6 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './support-page.html'
 })
-export class SupportPageComponent {}
+export class SupportPageComponent {
+  readonly siloProducts = PRODUCTS;
+}
