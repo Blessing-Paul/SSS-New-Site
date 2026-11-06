@@ -13,21 +13,21 @@
         <div class="ph-media ph-collage">
           <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=1100&amp;h=940&amp;q=80" alt="Engineers working together on a project" width="1100" height="940">
           <img class="ph-collage-sm" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=520&amp;h=420&amp;q=80" alt="Server room networking hardware" width="520" height="420">
-          <div class="ph-float"><i class="bi bi-layers"></i><div><strong>13 services, one team</strong><small>Software, infrastructure and security together.</small></div></div>
+          <div class="ph-float"><i class="bi bi-layers"></i><div><strong>{{ services.length }} services, one team</strong><small>Software, infrastructure and security together.</small></div></div>
         </div>
       </div>
     </section>
 
     <nav class="subnav" aria-label="Service categories">
       <div class="site-container">
-        <a href="#software">Software</a><a href="#web">Websites</a><a href="#portals">Portals</a><a href="#infrastructure">Servers</a><a href="#cloud">Cloud</a><a href="#security">Cybersecurity</a><a href="#networking">Networking</a><a href="#transformation">Automation</a><a href="#payments">Payments</a><a href="#data">Data</a><a href="#consulting">Consultancy</a><a href="#support">Managed IT</a><a href="#training">Training</a>
+        @for (service of services; track service.slug) {<a [href]="'#' + service.slug">{{ service.shortName }}</a>}<a href="#co-development">Co-development</a>
       </div>
     </nav>
 
     <section class="ps" id="catalogue">
       <div class="site-container">
         <div class="ps-head reveal">
-          <div><span class="kicker">Service catalogue</span><h2 class="ps-title">Thirteen capabilities. <em>One accountable partner.</em></h2></div>
+          <div><span class="kicker">Service catalogue</span><h2 class="ps-title">{{ countWord }} capabilities. <em>One accountable partner.</em></h2></div>
           <p>Jump to what you need using the menu above. Most clients start with one service and add more as they grow. You never pay for what you don't need.</p>
         </div>
         <div class="sectors">
@@ -38,7 +38,7 @@
             <h2>Purpose-built software for the way you work.</h2>
             <p>Tailored applications that address specific operational requirements, integrate with existing systems and evolve as your needs change.</p>
             <ul class="ticks cols"><li>Web application development</li><li>Desktop applications</li><li>Android &amp; iOS mobile apps</li><li>Enterprise applications</li><li>Database design &amp; development</li><li>API development &amp; integration</li><li>Legacy system modernization</li><li>Maintenance &amp; enhancement</li><li>Testing &amp; quality assurance</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=software#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="web">
@@ -48,7 +48,7 @@
             <h2>Digital experiences that inform, engage and convert.</h2>
             <p>Professional websites that build credibility and, where needed, grow into full service platforms with accounts, forms, payments and dashboards.</p>
             <ul class="ticks cols"><li>Corporate &amp; business websites</li><li>Institutional &amp; government sites</li><li>School &amp; university websites</li><li>E-commerce storefronts</li><li>NGO, church &amp; membership sites</li><li>Content management systems</li><li>Hosting, domains &amp; SSL</li><li>SEO &amp; performance</li><li>Accessibility &amp; analytics</li><li>Redesign &amp; maintenance</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=web#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="portals">
@@ -58,7 +58,7 @@
             <h2>One portal. The right services for every user.</h2>
             <p>Controlled access to information, services, transactions and workflows, with role-based dashboards, uploads, approvals, payments and notifications.</p>
             <ul class="ticks cols"><li>Customer &amp; client portals</li><li>Employee self-service</li><li>Student &amp; parent portals</li><li>Admissions portals</li><li>Citizen-service portals</li><li>Vendor &amp; supplier portals</li><li>Beneficiary portals</li><li>Member &amp; association portals</li><li>Application &amp; document portals</li><li>Multi-branch portals</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=portals#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="infrastructure">
@@ -68,7 +68,7 @@
             <h2>Your data. Your infrastructure. Your control.</h2>
             <p>Infrastructure planned around your security, availability, budget and data-management needs, whether local, cloud or hybrid.</p>
             <ul class="ticks cols"><li>On-premises server installation</li><li>Virtualization</li><li>Local app &amp; database hosting</li><li>File servers &amp; NAS/SAN</li><li>Directory services &amp; SSO</li><li>Intranets &amp; internal portals</li><li>Backup &amp; recovery planning</li><li>Monitoring &amp; capacity planning</li><li>Secure remote administration</li><li>Migration &amp; consolidation</li><li>Disaster recovery &amp; continuity</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=infrastructure#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="cloud">
@@ -78,7 +78,7 @@
             <h2>Flexible infrastructure for modern operations.</h2>
             <p>Cloud and hybrid environments planned around data sensitivity, availability, cost, performance and recovery requirements.</p>
             <ul class="ticks cols"><li>Cloud deployment &amp; configuration</li><li>Hosted websites &amp; applications</li><li>Cloud databases &amp; storage</li><li>Migration to the cloud</li><li>Hybrid integration</li><li>Backup &amp; disaster recovery</li><li>Identity &amp; access management</li><li>Monitoring &amp; cost optimization</li><li>High availability &amp; scaling</li><li>Dev, staging &amp; production</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=cloud#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="security">
@@ -88,7 +88,7 @@
             <h2>Protecting the systems your organization depends on.</h2>
             <p>We identify risks, strengthen controls and prepare for incidents, guided by references such as the NIST Cybersecurity Framework and the OWASP Top 10. Scope and authorization are agreed for every engagement.</p>
             <ul class="ticks cols"><li>Security posture assessments</li><li>Firewall &amp; network security</li><li>Endpoint protection</li><li>Identity &amp; MFA</li><li>Secure code reviews</li><li>Authorized vulnerability assessments</li><li>Logging &amp; monitoring</li><li>Encryption &amp; data protection</li><li>Security policies</li><li>Awareness training</li><li>Incident response planning</li><li>Third-party risk reviews</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=security#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="networking">
@@ -98,7 +98,7 @@
             <h2>Connecting people, devices, locations and systems.</h2>
             <p>Secure, reliable networks for offices, campuses, schools, hospitals, government facilities and multi-site organizations.</p>
             <ul class="ticks cols"><li>LAN &amp; WAN design</li><li>Structured cabling</li><li>Enterprise &amp; campus Wi-Fi</li><li>Switches &amp; routers</li><li>Firewalls &amp; gateways</li><li>VLANs &amp; segmentation</li><li>VPNs &amp; remote access</li><li>Inter-branch connectivity</li><li>Wireless coverage planning</li><li>Monitoring &amp; maintenance</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=networking#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="transformation">
@@ -108,7 +108,7 @@
             <h2>Less paperwork. Fewer repetitive tasks. Better visibility.</h2>
             <p>We map the current process, remove unnecessary steps and design a digital version that improves the work, not just moves paperwork onto a screen.</p>
             <ul class="ticks cols"><li>Online registration &amp; applications</li><li>Multi-level approvals</li><li>Electronic forms</li><li>Leave &amp; staff requests</li><li>Reminders &amp; notifications</li><li>Invoice &amp; payment workflows</li><li>Records digitization</li><li>Procurement approvals</li><li>Case &amp; complaint management</li><li>Automated reports</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=transformation#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="payments">
@@ -118,7 +118,7 @@
             <h2>Make digital payments part of the workflow.</h2>
             <p>We integrate authorized payment providers into your websites, apps and portals, with verified transaction status, secure callbacks and reconciliation reports.</p>
             <ul class="ticks cols"><li>School &amp; university fees</li><li>Training &amp; course fees</li><li>E-commerce checkout</li><li>Invoice payments</li><li>Membership dues</li><li>Event ticketing</li><li>Institutional service fees</li><li>Subscriptions &amp; billing</li><li>Reconciliation reports</li><li>Accounting integration</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=payments#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="data">
@@ -128,7 +128,7 @@
             <h2>Turn scattered information into useful insight.</h2>
             <p>We organize your data, improve its quality, connect sources and build reporting people actually use.</p>
             <ul class="ticks cols"><li>Database design &amp; implementation</li><li>Performance optimization</li><li>Data migration &amp; cleansing</li><li>Spreadsheet-to-system conversion</li><li>Dashboards &amp; reporting</li><li>Data integration</li><li>Backup &amp; archiving</li><li>Access controls &amp; audit</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=data#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="consulting">
@@ -138,7 +138,7 @@
             <h2>Make informed decisions before you invest.</h2>
             <p>Independent advice on what to build, buy, integrate or retire, with roadmaps sized to your budget and priorities.</p>
             <ul class="ticks cols"><li>Technology assessments</li><li>Digital transformation roadmaps</li><li>Requirements &amp; specifications</li><li>Solution architecture</li><li>Vendor &amp; tender evaluation</li><li>Project oversight</li><li>Process mapping</li><li>Budget planning</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=consulting#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="support">
@@ -148,7 +148,7 @@
             <h2>Reliable support for the systems that keep you running.</h2>
             <p>Agreed service arrangements covering help desk, maintenance, monitoring and updates. Coverage and response times are defined in your contract.</p>
             <ul class="ticks cols"><li>Help desk &amp; user support</li><li>Preventive maintenance</li><li>Software updates &amp; patching</li><li>Hardware support</li><li>Server &amp; network monitoring</li><li>Backup verification</li><li>On-site &amp; remote support</li><li>Service level agreements</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=support#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         <article class="sector reveal" id="training">
@@ -158,7 +158,7 @@
             <h2>Technology delivers value when people know how to use it.</h2>
             <p>Role-based training, documentation and change support so your team works confidently with new systems.</p>
             <ul class="ticks cols"><li>End-user training</li><li>Administrator training</li><li>Train-the-trainer programmes</li><li>User guides &amp; manuals</li><li>Cybersecurity awareness</li><li>Digital literacy</li><li>Change management</li><li>Refresher sessions</li></ul>
-            <a class="sector-link" href="/contact">Talk to us about this <i class="bi bi-arrow-right"></i></a>
+            <a class="sector-link" href="/contact?service=training#enquiry">Talk to us about this <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
         </div>

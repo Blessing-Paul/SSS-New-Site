@@ -1,0 +1,48 @@
+<div class="pt-page">
+  <header class="pt-head">
+    <div class="pt-title-layout">
+      <span class="pt-heading-icon"><i class="bi" [class]="config().icon" aria-hidden="true"></i></span>
+      <div class="pt-heading-copy">
+        <span class="pt-eyebrow">Customer workspace · Inbox</span>
+        <h1>{{ config().title }}</h1>
+        <p>{{ items().length }} shown. Open one to reply, assign or update its status.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="pt-toolbar">
+    <label class="pt-search"><i class="bi bi-search" aria-hidden="true"></i>
+      <input type="search" placeholder="Search reference, name, email or organization" (input)="setQuery($event)" aria-label="Search">
+    </label>
+    <select class="pt-select" (change)="setFilter($event)" aria-label="Filter">
+      <option value="active">Active</option>
+      <option value="unassigned">Unassigned</option>
+      @for (status of config().statuses; track status) { <option [value]="status">{{ statusLabels[status] }}</option> }
+      <option value="all">All</option>
+    </select>
+  </div>
+
+  <div class="pt-card pt-table-card">
+    @if (items().length) {
+      <table class="pt-table">
+        <thead><tr><th>Request</th><th>From</th><th>Status</th><th>Owner</th><th>Updated</th></tr></thead>
+        <tbody>
+          @for (item of items(); track item.id) {
+            <tr [class.is-new]="item.status === 'new'">
+              <td><a class="pt-row-link" [routerLink]="[item.id]">
+                <span class="pt-dot" [attr.data-priority]="item.priority"></span>
+                <span><strong>{{ item.subject }}</strong><small>{{ item.reference }}</small></span>
+              </a></td>
+              <td><span class="pt-cell-2"><span>{{ item.contact.name }}</span><small>{{ item.contact.organization || item.contact.email }}</small></span></td>
+              <td><span class="pt-status" [attr.data-status]="item.status">{{ statusLabels[item.status] }}</span></td>
+              <td class="pt-muted">{{ assigneeName(item.assigneeId) }}</td>
+              <td class="pt-muted">{{ timeAgo(item.updatedAt) }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="pt-empty"><i class="bi bi-inbox"></i> Nothing here. Try another filter.</p>
+    }
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="pt-shell" [class.menu-open]="menuOpen()" [class.sidebar-collapsed]="sidebarCollapsed()">
+  <aside class="pt-side" aria-label="Portal navigation">
+    <a class="pt-brand" routerLink="/portal">
+      <img class="pt-logo-day" src="assets/stable-shield-logo-transparent.png" alt="Stable Shield Solutions">
+      <img class="pt-logo-night" src="assets/stable-shield-logo-light.png" alt="" aria-hidden="true">
+      <span>Portal</span>
+    </a>
+    <nav class="pt-nav">
+      @for (section of nav(); track section.title) {
+        <p class="pt-nav-title">{{ section.title }}</p>
+        @for (item of section.items; track item.link) {
+          <a [routerLink]="item.link" [ngbTooltip]="item.label" [disableTooltip]="!sidebarCollapsed()" placement="right" container="body" [routerLinkActive]="'is-active'" [routerLinkActiveOptions]="{ exact: item.link === '/portal' }">
+            <i class="bi" [class]="item.icon" aria-hidden="true"></i><span>{{ item.label }}</span>
+            @if (item.badge && item.badge()) { <b class="pt-badge">{{ item.badge() }}</b> }
+          </a>
+        }
+      }
+    </nav>
+    <a class="pt-side-foot" href="/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> View website</a>
+  </aside>
+  <button class="pt-scrim" type="button" aria-label="Close menu" (click)="menuOpen.set(false)"></button>
+
+  <div class="pt-main">
+    <header class="pt-top">
+      <button class="pt-icon-btn pt-burger" type="button" aria-label="Open menu" (click)="menuOpen.set(true)"><i class="bi bi-list"></i></button>
+      <button class="pt-icon-btn pt-sidebar-toggle" type="button" [attr.aria-label]="sidebarCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'" [attr.title]="sidebarCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'" [attr.aria-expanded]="!sidebarCollapsed()" (click)="sidebarCollapsed.set(!sidebarCollapsed())"><i class="bi" [class.bi-chevron-bar-left]="!sidebarCollapsed()" [class.bi-chevron-bar-right]="sidebarCollapsed()"></i></button>
+      <div class="pt-global-search" (keydown.escape)="closeSearch()">
+        <label class="pt-search"><i class="bi bi-search" aria-hidden="true"></i>
+          <input type="search" placeholder="Search portal…" aria-label="Search portal" [value]="searchQuery()" (input)="setSearchQuery($event)" (focus)="searchOpen.set(true)">
+        </label>
+        <div class="pt-search-results" [ngbCollapse]="!searchOpen() || searchQuery().trim().length < 2" role="listbox" aria-label="Portal search results">
+          @for (result of searchResults(); track result.link) {
+            <a [routerLink]="result.link" role="option" (click)="closeSearch()">
+              <i class="bi" [class]="result.icon" aria-hidden="true"></i>
+              <span><strong>{{ result.label }}</strong><small>{{ result.detail }}</small></span>
+            </a>
+          } @empty {
+            <p class="pt-search-empty">No matching records.</p>
+          }
+        </div>
+      </div>
+      <div class="pt-top-spacer"></div>
+      <button class="pt-icon-btn" type="button" aria-label="Messages (coming soon)" title="Messages (coming soon)" disabled><i class="bi bi-chat-dots"></i></button>
+      <button class="pt-icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" (click)="toggleTheme()"><i class="bi bi-circle-half"></i></button>
+      @if (user(); as me) {
+        <div class="pt-user" ngbDropdown placement="bottom-end">
+          <button class="pt-user-btn" type="button" ngbDropdownToggle>
+            <span class="pt-avatar">{{ initials() }}</span>
+            <span class="pt-user-text"><strong>{{ me.name }}</strong><small>{{ me.jobTitle }}</small></span>
+            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+          </button>
+            <div class="pt-user-menu" ngbDropdownMenu role="menu">
+              <p><small>Signed in as</small>{{ me.email }}</p>
+              <p class="pt-roles">@for (role of me.roles; track role) { <span class="pt-chip">{{ roleLabels[role] }}</span> }</p>
+              <a routerLink="/portal/profile" ngbDropdownItem role="menuitem"><i class="bi bi-person"></i> My profile</a>
+              <button type="button" ngbDropdownItem role="menuitem" (click)="logout()"><i class="bi bi-box-arrow-right"></i> Sign out</button>
+            </div>
+        </div>
+      }
+    </header>
+    <main class="pt-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

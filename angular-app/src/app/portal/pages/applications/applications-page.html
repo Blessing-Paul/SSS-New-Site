@@ -1,0 +1,53 @@
+<div class="pt-page">
+  <header class="pt-head">
+    <div class="pt-title-layout">
+      <span class="pt-heading-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
+      <div class="pt-heading-copy">
+        <span class="pt-eyebrow">People · Hiring</span>
+        <h1>Staff applications</h1>
+        <p>Applications from the Careers page. Hiring an applicant creates their staff account.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="pt-pipeline" role="tablist" aria-label="Filter by stage">
+    <button type="button" role="tab" [attr.aria-selected]="stage() === 'active'" (click)="stage.set('active')">Active</button>
+    @for (s of stages; track s) {
+      <button type="button" role="tab" [attr.aria-selected]="stage() === s" [attr.data-stage]="s" (click)="stage.set(s)">
+        {{ stageLabels[s] }} <b>{{ stageCounts()[s] ?? 0 }}</b>
+      </button>
+    }
+    <button type="button" role="tab" [attr.aria-selected]="stage() === 'all'" (click)="stage.set('all')">All</button>
+  </div>
+
+  <div class="pt-toolbar">
+    <label class="pt-search"><i class="bi bi-search" aria-hidden="true"></i>
+      <input type="search" placeholder="Search name, email, role or location" (input)="setQuery($event)" aria-label="Search applications">
+    </label>
+  </div>
+
+  <div class="pt-card pt-table-card">
+    @if (items().length) {
+      <table class="pt-table">
+        <thead><tr><th>Applicant</th><th>Role</th><th>Experience</th><th>Stage</th><th>Rating</th><th>Applied</th></tr></thead>
+        <tbody>
+          @for (app of items(); track app.id) {
+            <tr [class.is-new]="app.stage === 'applied'">
+              <td><a class="pt-row-link" [routerLink]="[app.id]">
+                <span class="pt-avatar sm">{{ app.name[0] }}</span>
+                <span><strong>{{ app.name }}</strong><small>{{ app.reference }} · {{ app.location }}</small></span>
+              </a></td>
+              <td>{{ app.role }}</td>
+              <td class="pt-muted">{{ app.experience }}</td>
+              <td><span class="pt-stage" [attr.data-stage]="app.stage">{{ stageLabels[app.stage] }}</span></td>
+              <td class="pt-stars" [attr.aria-label]="app.rating ? app.rating + ' of 5' : 'Not rated'">{{ stars(app.rating) }}</td>
+              <td class="pt-muted">{{ timeAgo(app.createdAt) }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="pt-empty"><i class="bi bi-person"></i> No applications in this stage.</p>
+    }
+  </div>
+</div>

@@ -2,33 +2,42 @@
   <section class="ph">
     <div class="site-container ph-grid single">
       <div>
-        <span class="kicker">Secure access</span>
+        <span class="kicker">Staff portal</span>
         <h1>Welcome <em>back.</em></h1>
-        <p class="ph-lead">Sign in to continue to your Stable Shield workspace.</p>
+        <p class="ph-lead">Sign in with your company email to reach your inboxes, applications and team.</p>
       </div>
     </div>
   </section>
 
   <section class="ps tight">
     <div class="site-container">
-      <form class="form-p f-stack login-form" (submit)="onSubmit($event)">
+      <form class="form-p f-stack login-form" novalidate (submit)="onSubmit($event)">
         <div class="form-head">
           <h2>Sign in</h2>
-          <p>Enter your account details to continue.</p>
+          <p>Use your <strong>&#64;stableshield.com</strong> account.</p>
         </div>
-        <label>Username
-          <input type="text" name="username" autocomplete="username" required>
+        <label>Company email
+          <input type="text" inputmode="email" name="email" autocomplete="username" required placeholder="you@stableshield.com">
         </label>
         <label>Password
-          <input type="password" name="password" autocomplete="current-password" required>
+          <span class="pw-field">
+            <input [type]="showPassword() ? 'text' : 'password'" name="password" autocomplete="current-password" required>
+            <button type="button" class="pw-toggle" (click)="showPassword.set(!showPassword())" [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+              <i class="bi" [class.bi-eye]="!showPassword()" [class.bi-eye-slash]="showPassword()"></i>
+            </button>
+          </span>
         </label>
         <div class="login-options">
-          <label class="f-check"><input type="checkbox" name="remember"> Remember me</label>
-          <a href="/contact">Need help signing in?</a>
+          <label class="f-check"><input type="checkbox" name="remember"> Keep me signed in</label>
+          <a href="/access">Webmail &amp; sign-in help</a>
         </div>
-        <button class="btn-p primary" type="submit">Sign in <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
-        <p class="f-status" role="status" aria-live="polite">{{ status }}</p>
-        <p class="login-note"><i class="bi bi-shield-lock" aria-hidden="true"></i> Authentication is not connected yet. This page does not send or store your credentials.</p>
+        <button class="btn-p primary" type="submit" [disabled]="busy()">{{ busy() ? 'Signing in…' : 'Sign in' }} <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+        <p class="f-status" role="status" aria-live="polite" [attr.data-state]="status() ? 'error' : null">{{ status() }}</p>
+        @if (isLocal) {
+        <div class="login-note"><i class="bi bi-info-circle" aria-hidden="true"></i>
+          <span>Demo accounts (local only), password <code>portal123</code>:<br>
+          admin&#64;stableshield.com · hr&#64;stableshield.com · sales&#64;stableshield.com · support&#64;stableshield.com · chidi&#64;stableshield.com</span></div>
+        }
       </form>
     </div>
   </section>

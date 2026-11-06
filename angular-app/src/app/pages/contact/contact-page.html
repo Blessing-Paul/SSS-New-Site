@@ -23,26 +23,21 @@
           <h2 class="ps-title">Help us understand <em>the challenge.</em></h2>
           <p class="ps-lead" style="margin:18px 0 24px">A useful first enquiry includes:</p>
           <ul class="ticks"><li>Your organization and role</li><li>The problem or opportunity</li><li>Who will use the solution</li><li>Existing systems or infrastructure</li><li>Timing or operational constraints</li></ul>
-          <!-- Add verified office address, email, phone and hours here before launch. -->
-          <div class="info-list" style="margin-top:30px">
+          <div class="reach" id="reach">
+            <a class="reach-card reach-call" href="tel:09158594120"><i class="bi bi-telephone"></i><span><small>Call us · Line 1</small><strong>0915 859 4120</strong></span></a>
+            <a class="reach-card reach-call" href="tel:09060304654"><i class="bi bi-telephone"></i><span><small>Call us · Line 2</small><strong>0906 030 4654</strong></span></a>
+            <a class="reach-card" href="mailto:support@stableshield.com"><i class="bi bi-headset"></i><span><small>Support</small><strong>support@stableshield.com</strong></span></a>
+            <a class="reach-card" href="mailto:sales@stableshield.com"><i class="bi bi-briefcase"></i><span><small>Sales</small><strong>sales@stableshield.com</strong></span></a>
+            <a class="reach-card" href="mailto:info@stableshield.com"><i class="bi bi-building"></i><span><small>General &amp; corporate</small><strong>info@stableshield.com</strong></span></a>
+            <a class="reach-card" href="mailto:legal@stableshield.com"><i class="bi bi-file-earmark-text"></i><span><small>Legal</small><strong>legal@stableshield.com</strong></span></a>
+          </div>
+          <div class="info-list" style="margin-top:20px">
+            <div><i class="bi bi-geo-alt"></i><span><strong>Address</strong>Plot 6, Metropolis Estate, Off Gwarimpa Estate</span></div>
             <div><i class="bi bi-clock"></i><span><strong>Response time</strong>We aim to reply to enquiries within one to two working days.</span></div>
             <div><i class="bi bi-shield-lock"></i><span><strong>Your information is safe</strong>Please don't send passwords or payment details through this form.</span></div>
           </div>
         </div>
-        <form class="form-p f-stack reveal" name="project-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
-          <input type="hidden" name="form-name" value="project-enquiry">
-          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
-          <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Organization<input name="organization" autocomplete="organization"></label></div>
-          <div class="f-row"><label>Email *<input type="email" name="email" required autocomplete="email"></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
-          <div class="f-row">
-            <label>Organization type<select name="industry"><option>Business / enterprise</option><option>Government institution</option><option>University / tertiary</option><option>School</option><option>NGO / non-profit</option><option>Faith-based organization</option><option>Healthcare</option><option>Agriculture</option><option>Other</option></select></label>
-            <label>What do you need? *<select name="service" id="enquiry-service" required><option value="">Choose one</option><option value="software">Custom software development</option><option>Website or portal</option><option>School / Office / Training Silo</option><option>Servers, cloud &amp; infrastructure</option><option>Networking</option><option>Cybersecurity</option><option>Process automation &amp; payments</option><option>Consultancy</option><option>Support &amp; managed IT</option><option value="co-development">Help with our in-house project</option></select></label>
-          </div>
-          <label>Project details *<textarea name="message" required placeholder="What do you want to achieve?"></textarea></label>
-          <label class="f-check"><input type="checkbox" name="consent" required> I agree that Stable Shield Solutions may use these details to respond, as described in the <a href="/privacy">privacy notice</a>.</label>
-          <button class="btn-p primary" type="submit">Send enquiry <i class="bi bi-send"></i></button>
-          <p class="f-status" role="status"></p>
-        </form>
+        <app-project-enquiry-form class="reveal" />
       </div>
     </section>
 
@@ -63,15 +58,15 @@
             <div><i class="bi bi-building"></i><strong>In person</strong><small>At your office or ours</small></div>
           </div>
         </div>
-        <form class="form-p f-stack reveal" name="meeting-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
-          <input type="hidden" name="form-name" value="meeting-request">
-          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+        <form class="form-p f-stack reveal" appFormSubmit="meeting-request">
+          <p hidden aria-hidden="true"><label>Leave this blank <input name="website_hp" tabindex="-1" autocomplete="off"></label></p>
           <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Email *<input type="email" name="email" required autocomplete="email"></label></div>
-          <div class="f-row"><label>Preferred date *<input type="date" name="date" required></label><label>Preferred time<select name="time"><option>Morning</option><option>Afternoon</option><option>Any time</option></select></label></div>
+          <div class="f-row"><label>Phone <small class="f-hint">needed for phone calls</small><input type="tel" name="phone" autocomplete="tel"></label><label>Time zone<select name="timezone"><option>West Africa Time (WAT, UTC+1)</option><option>GMT / UTC</option><option>Other (tell us in the topic)</option></select></label></div>
+          <div class="f-row"><label>Preferred date *<input type="date" name="date" required></label><label>Preferred time<select name="time"><option>Morning (9am–12pm)</option><option>Midday (12pm–2pm)</option><option>Afternoon (2pm–5pm)</option><option>Any time</option></select></label></div>
           <label>Meeting type<select name="type"><option>Video call</option><option>Phone call</option><option>In person</option></select></label>
           <label>Topic<input name="topic" placeholder="e.g. School Silo demo, network upgrade"></label>
           <button class="btn-p primary" type="submit">Request meeting <i class="bi bi-calendar-check"></i></button>
-          <p class="f-status" role="status"></p>
+          <p class="f-status" role="status" aria-live="polite" data-form-status></p>
         </form>
       </div>
     </section>

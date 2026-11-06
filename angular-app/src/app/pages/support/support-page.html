@@ -34,24 +34,33 @@
           <span class="kicker">Service request</span>
           <h2 class="ps-title">Submit a <em>support request.</em></h2>
           <p class="ps-lead" style="margin:18px 0 24px">Response targets, support hours and escalation routes are defined in your support agreement.</p>
+          <p class="ps-lead">For support, email <a href="mailto:support@stableshield.com">support@stableshield.com</a> or call <a href="tel:09158594120">09158594120</a> / <a href="tel:09060304654">09060304654</a>.</p>
           <div class="info-list">
             <div><i class="bi bi-exclamation-octagon"></i><span><strong>Critical</strong>System down or data at risk, all users affected.</span></div>
             <div><i class="bi bi-exclamation-triangle"></i><span><strong>High</strong>Major feature unavailable, workaround hard.</span></div>
             <div><i class="bi bi-info-circle"></i><span><strong>Normal</strong>Questions, minor issues and how-to requests.</span></div>
           </div>
         </div>
-        <form class="form-p f-stack reveal" name="support-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
-          <input type="hidden" name="form-name" value="support-request">
-          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+        <form class="form-p f-stack reveal" appFormSubmit="support-request">
+          <p hidden aria-hidden="true"><label>Leave this blank <input name="website_hp" tabindex="-1" autocomplete="off"></label></p>
           <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Organization *<input name="organization" required autocomplete="organization"></label></div>
           <div class="f-row"><label>Email *<input type="email" name="email" required autocomplete="email"></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
+          <div class="f-row"><label>Client / account reference<input name="account_ref" placeholder="Contract or account ID, if known"></label><label>Issue category *<select name="category" required><option value="">Choose one</option><option>Can't sign in / access</option><option>Error or bug</option><option>Performance or outage</option><option>Data or report problem</option><option>Feature or change request</option><option>Training or how-to question</option><option>Other</option></select></label></div>
           <div class="f-row">
             <label>System *<select name="system" required><option value="">Choose one</option>@for (item of siloProducts; track item.slug) {<option>{{ item.name }}</option>}<option>Custom application</option><option>Website</option><option>Server / network</option><option>Other</option></select></label>
-            <label>Priority<select name="priority"><option>Normal</option><option>High</option><option>Critical</option></select></label>
+            <label>Version / module<input name="system_version" placeholder="e.g. v2.4, Fees module"></label>
           </div>
-          <label>Describe the issue *<textarea name="message" required placeholder="What happened, steps to reproduce, error messages"></textarea></label>
+          <div class="f-row">
+            <label>Priority<select name="priority"><option>Normal</option><option>High</option><option>Critical</option></select></label>
+            <label>Users affected<select name="users_affected"><option>Just me</option><option>A few users (2–10)</option><option>A team or department</option><option>Everyone</option></select></label>
+          </div>
+          <label>Business impact<input name="impact" placeholder="e.g. fees can't be collected, staff can't clock in"></label>
+          <label>What happened? *<textarea name="message" required placeholder="Describe the problem and any error messages you saw"></textarea></label>
+          <label>Steps to reproduce<textarea name="steps" rows="3" placeholder="1. Open… 2. Click… 3. See error"></textarea></label>
+          <label>Screenshot <small class="f-hint">optional, image or PDF</small><input type="file" name="screenshot" accept="image/*,.pdf"></label>
+          <p class="f-hint">Never include passwords, card details or other credentials in this form.</p>
           <button class="btn-p primary" type="submit">Submit request <i class="bi bi-send"></i></button>
-          <p class="f-status" role="status"></p>
+          <p class="f-status" role="status" aria-live="polite" data-form-status></p>
         </form>
       </div>
     </section>

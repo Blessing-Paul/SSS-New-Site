@@ -224,9 +224,8 @@
           <p class="ps-lead" style="margin:18px 0 24px">Tell us a little about your organization. We'll show you the product live and answer every question, with no obligation.</p>
           <ul class="ticks"><li>30–45 minutes, online or in person</li><li>Focused on your processes, not a generic tour</li><li>A clear proposal afterwards</li></ul>
         </div>
-        <form class="form-p f-stack reveal" name="product-demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-preview-form>
-          <input type="hidden" name="form-name" value="product-demo">
-          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+        <form class="form-p f-stack reveal" appFormSubmit="product-demo">
+          <p hidden aria-hidden="true"><label>Leave this blank <input name="website_hp" tabindex="-1" autocomplete="off"></label></p>
           <div class="f-row"><label>Full name *<input name="name" required autocomplete="name"></label><label>Organization *<input name="organization" required autocomplete="organization"></label></div>
           <div class="f-row"><label>Email *<input type="email" name="email" required autocomplete="email"></label><label>Phone<input type="tel" name="phone" autocomplete="tel"></label></div>
           <div class="f-row">
@@ -244,7 +243,7 @@
           <label>What would you like to see?<textarea name="message" placeholder="The processes or challenges you'd like us to focus on"></textarea></label>
           <label class="f-check"><input type="checkbox" name="consent" required> I agree to be contacted about this request as described in the <a href="/privacy">privacy notice</a>.</label>
           <button class="btn-p primary" type="submit">Book my demo <i class="bi bi-send"></i></button>
-          <p class="f-status" role="status"></p>
+          <p class="f-status" role="status" aria-live="polite" data-form-status></p>
         </form>
       </div>
     </section>

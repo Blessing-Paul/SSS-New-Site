@@ -20,24 +20,32 @@ npm install
 npm start
 ```
 
-Open `http://localhost:4200/`. Angular Router supports clean paths such as `/about` and `/products`; legacy `.html` paths redirect to their clean equivalents. `angular-app/public/_redirects` provides the single-page-app fallback for Netlify direct-route requests. Bootstrap 5.3.8, Bootstrap Icons and Google Fonts are retained from their CDNs. Original page CSS and image assets are preserved. Forms retain their Netlify attributes; local development shows a preview-only submission message. The login page is a UI preview only; authentication is not implemented.
+Open `http://localhost:4200/`. Angular Router supports clean paths such as `/about` and `/products`; legacy `.html` paths redirect to their clean equivalents. `angular-app/public/_redirects` provides the single-page-app fallback for Netlify direct-route requests. Bootstrap 5.3.8, Bootstrap Icons and Google Fonts are retained from their CDNs. Original page CSS and image assets are preserved. Until the Laravel API is connected, forms open the visitor's email app with their details pre-filled (see below). The login page is a UI preview only; authentication is not implemented.
 
 Build and run the Angular tests with `npm run build` and `npm test -- --watch=false` from `angular-app/`.
 
-The static Netlify form declarations in `angular-app/src/index.html` allow Netlify to discover forms compiled into Angular templates. Actual form delivery still depends on the deployed site's Netlify configuration and should be tested after deployment.
+## Forms and the Laravel backend
+Every form is sent by `FormSubmitDirective` (`angular-app/src/app/shared/form-submit.directive.ts`) through `FormSubmissionService`. Endpoints live in `angular-app/src/app/core/form-api.config.ts`:
 
-## Enable the contact form
-The form is marked up for **Netlify Forms**. To receive submissions:
-1. Deploy the folder to Netlify.
-2. Confirm form detection is enabled and deploy once.
-3. Submit a test enquiry and confirm it appears in Netlify Forms.
-4. Configure notifications to an official company inbox and add a suitable spam-protection policy.
-5. If deploying elsewhere, replace the form's `data-netlify` setup with your chosen backend/form endpoint and test it end-to-end.
+| Form | Endpoint |
+| --- | --- |
+| Project enquiry (Home, Contact) | `POST /api/enquiries` |
+| Meeting request | `POST /api/meeting-requests` |
+| Support request | `POST /api/support-tickets` |
+| Product demo | `POST /api/demo-requests` |
+| Staff application (Careers, /apply) | `POST /api/staff-applications` |
+| Partner application | `POST /api/partner-applications` |
 
-No official email, telephone number, street address, social profiles, client references, certifications or case-study results were invented because they were not provided in the source blueprint.
+- While `apiBaseUrl` is empty, forms validate and then open the visitor's email app with a pre-filled message (routing in `mailFallback`: enquiries, meetings and demos → sales@, support → support@, job applications → info@, partner applications → info@ cc legal@). Files (CV, screenshots) can't be attached automatically, so the message asks the visitor to attach them.
+- When the API is live, set `apiBaseUrl`. Forms post `multipart/form-data` with `Accept: application/json`; field `name`s (snake_case) are the request contract. Array fields use `name[]` (e.g. `products[]`).
+- Laravel should return 201 on success and the standard 422 `{ message, errors }` on validation failure; errors are shown under the matching fields.
+- `website_hp` is a honeypot: the frontend drops filled submissions, and the API should reject them too.
+- File limits (CV, screenshots) and staff-application stages (applied → screening → interview → offer → staff account) are enforced by the backend.
+
+The company phone numbers, support and sales emails, corporate-relations emails and address have been added to the Contact page and shared footer. Social profiles, client references, certifications and case-study results have not been invented.
 
 ## Before public launch
-- Add verified company contact details and business hours.
+- Confirm the published company contact details and business hours are current.
 - Confirm the legal company name and any registration details the company chooses to publish.
 - Replace the draft Privacy Notice and Terms with reviewed documents matching real practices and applicable law.
 - Confirm current product availability and features, particularly Office Silo and Training Silo.

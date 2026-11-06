@@ -14,6 +14,7 @@ import { SiteHeaderComponent } from './shared/site-header/site-header';
 })
 export class App implements OnInit, OnDestroy {
   private readonly routeSubscription: Subscription;
+  inPortal = false;
 
   constructor(
     private readonly router: Router,
@@ -26,6 +27,8 @@ export class App implements OnInit, OnDestroy {
       .subscribe((event) => {
         const path = event.urlAfterRedirects.split(/[?#]/, 1)[0];
         const homePage = path === '/' || path === '/index-copy';
+        this.inPortal = path === '/portal' || path.startsWith('/portal/');
+        document.body.classList.toggle('portal-app', this.inPortal);
         document.body.classList.toggle('inner', !homePage);
         document.body.classList.toggle('home', homePage);
         this.updatePageMetadata();
@@ -64,7 +67,7 @@ export class App implements OnInit, OnDestroy {
     if (destination.origin !== window.location.origin) return;
     const path = destination.pathname.replace(/\/$/, '');
     const isRoute = path === '' ||
-      /^\/(?:index-copy|about|accessibility|apply|careers|contact|industries|login|office-silo|partners|portal|privacy|products(?:\/[a-z-]+)?|resources|school-silo|services|support|terms|training-silo|unauthorized)$/.test(path) ||
+      /^\/(?:index-copy|about|accessibility|apply|careers|contact|industries|login|office-silo|partners|portal(?:\/[\w-]+)*|access|privacy|products(?:\/[a-z-]+)?|resources|school-silo|services|support|terms|training-silo|unauthorized)$/.test(path) ||
       /\.html$/i.test(path);
     if (!isRoute) return;
     if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;

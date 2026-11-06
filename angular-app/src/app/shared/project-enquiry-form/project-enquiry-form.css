@@ -1,0 +1,13 @@
+:host { display: block; min-width: 0; }
+:host(.is-card) .pef {
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--p-line);
+  border-radius: 18px;
+  background: var(--p-card);
+  box-shadow: 0 24px 60px -32px rgba(10, 25, 45, 0.35);
+}
+.pef-head h3 { margin: 0 0 4px; font-size: 22px; }
+.pef-head p { margin: 0; color: var(--p-muted); font-size: 14px; }
+.pef-note { margin: 0; color: var(--p-muted); font-size: 13px; }
+.pef .btn-p { justify-self: start; }
+:host { position: relative; align-self: center; color: var(--p-ink); }

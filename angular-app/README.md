@@ -20,4 +20,4 @@ npm start
 
 Open `http://localhost:4200/`. Routes use clean paths, including `/apply`, `/login`, and `/unauthorized`; unmatched paths display the themed 404 page. Legacy `.html` paths redirect to their clean equivalents. The login page is a UI-only preview and does not authenticate or transmit credentials. Run `npm run build` for a production build and `npm run test -- --watch=false` for unit tests.
 
-Forms retain their Netlify attributes; actual delivery depends on the deployed site's form configuration. The careers form is available on `/careers` and `/apply`.
+Forms are sent through `FormSubmitDirective`/`FormSubmissionService` to the Laravel API configured in `src/app/core/form-api.config.ts` (while `apiBaseUrl` is empty, forms open the visitor's email app with a pre-filled message instead). The staff application form is shared by `/careers` and `/apply`.

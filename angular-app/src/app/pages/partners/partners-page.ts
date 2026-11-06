@@ -1,4 +1,7 @@
 import { PRODUCTS } from '../../core/products.data';
+import { SERVICES, SERVICE_GROUPS } from '../../core/services.data';
+import { FormSubmitDirective } from '../../shared/form-submit.directive';
+import { SubmissionResult } from '../../core/form-submission.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 interface ReviewRow {
@@ -10,10 +13,16 @@ interface ReviewRow {
 @Component({
   selector: 'app-partners-page',
   standalone: true,
+  imports: [FormSubmitDirective],
   templateUrl: './partners-page.html'
 })
 export class PartnersPageComponent implements OnInit {
   readonly siloProducts = PRODUCTS;
+  readonly serviceGroups = SERVICE_GROUPS.map((name) => {
+    const items = SERVICES.filter((service) => service.group === name);
+    return { name, icon: items[0].icon, examples: items.map((item) => item.shortName).join(', ') };
+  });
+  partnershipKey = '';
   prefillProduct = '';
   @ViewChild('partnerForm', { static: true }) private form!: ElementRef<HTMLFormElement>;
 
@@ -32,7 +41,7 @@ export class PartnersPageComponent implements OnInit {
     const product = params.get('product') ||
       (params.get('type') === 'co-development' ? 'My in-house project' : '');
     this.prefillProduct = product;
-    this.form.nativeElement.querySelectorAll<HTMLInputElement>('[name="products"]')
+    this.form.nativeElement.querySelectorAll<HTMLInputElement>('[name="products[]"]')
       .forEach((input) => { input.checked = input.value === product; });
 
     this.syncCoDevelopment();
@@ -58,15 +67,29 @@ export class PartnersPageComponent implements OnInit {
     this.status = '';
   }
 
+  /** Enter on an earlier step moves forward instead of submitting; the final step is sent by FormSubmitDirective. */
   onSubmit(event: SubmitEvent): void {
+    if (this.currentStep < 4) {
+      event.preventDefault();
+      this.nextStep();
+      return;
+    }
     const panel = this.getPanel(this.currentStep);
     if (!panel || !this.validate(panel)) event.preventDefault();
   }
 
+  onSubmitted(result: SubmissionResult): void {
+    if (result.ok && !result.viaEmail) {
+      this.currentStep = 0;
+      this.syncCoDevelopment();
+    }
+  }
+
   private syncCoDevelopment(): void {
-    this.isCoDevelopment = Boolean(this.form.nativeElement.querySelector<HTMLInputElement>(
+    this.partnershipKey = this.form.nativeElement.querySelector<HTMLInputElement>(
       '[name="partnership_type"]:checked'
-    )?.dataset['key'] === 'co-development');
+    )?.dataset['key'] ?? '';
+    this.isCoDevelopment = this.partnershipKey === 'co-development';
   }
 
   private getPanel(index: number): HTMLElement | null {
@@ -85,7 +108,7 @@ export class PartnersPageComponent implements OnInit {
     }
 
     if (panel.dataset['step'] === '1' && !firstInvalid &&
-      !panel.querySelector<HTMLInputElement>('[name="products"]:checked')) {
+      !panel.querySelector<HTMLInputElement>('[name="products[]"]:checked')) {
       this.status = 'Please choose at least one product or service.';
       return false;
     }
@@ -111,7 +134,7 @@ export class PartnersPageComponent implements OnInit {
           rows.some((row) => row.name === field.name)) return;
         const value = data.getAll(field.name).filter(Boolean).join(', ');
         if (!value) return;
-        const label = field.name === 'products'
+        const label = field.name === 'products[]'
           ? 'Products / services'
           : field.name === 'partnership_type'
             ? 'Partnership type'

@@ -20,7 +20,6 @@ export class SiteEffectsService {
     this.initializeCardEffects();
     this.initializeCounters();
     this.initializeSubnav();
-    this.initializeForms();
     this.initializePrefilledSelects();
     this.initializePortalLinks();
     this.initializeTabs();
@@ -116,23 +115,6 @@ export class SiteEffectsService {
       if (element) observer.observe(element);
     });
     this.cleanups.push(() => observer.disconnect());
-  }
-
-  private initializeForms(): void {
-    const forms = [...document.querySelectorAll<HTMLFormElement>('[data-preview-form], #partner-form')];
-    forms.forEach((form) => {
-      const submit = (event: SubmitEvent): void => {
-        if (event.defaultPrevented ||
-          (location.protocol !== 'file:' && !['localhost', '127.0.0.1'].includes(location.hostname))) return;
-        event.preventDefault();
-        const status = form.querySelector<HTMLElement>('.f-status');
-        if (status) {
-          status.textContent = 'Preview mode: the form works, but submissions are only delivered once the site is deployed with form handling enabled.';
-        }
-      };
-      form.addEventListener('submit', submit);
-      this.cleanups.push(() => form.removeEventListener('submit', submit));
-    });
   }
 
   private initializePrefilledSelects(): void {

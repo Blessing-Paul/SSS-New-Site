@@ -19,7 +19,7 @@
       <a href="/resources" [attr.aria-current]="isCurrent('/resources') ? 'page' : null" (click)="closeMenu()">Resources</a>
       <a href="/partners" [attr.aria-current]="isCurrent('/partners') ? 'page' : null" (click)="closeMenu()">Partners</a>
       <a href="/careers" [attr.aria-current]="isCurrent('/careers') ? 'page' : null" (click)="closeMenu()">Careers</a>
-      <a class="nav-mobile-only" href="/portal" (click)="closeMenu()"><i class="bi bi-person-lock" aria-hidden="true"></i> Staff login</a>
+      <a class="nav-mobile-only" href="/login" (click)="closeMenu()"><i class="bi bi-person-lock" aria-hidden="true"></i> Staff login</a>
       <a class="nav-cta" href="/contact" (click)="closeMenu()">Contact us <span aria-hidden="true">↗</span></a>
     </nav>
     <button class="theme-toggle" type="button" [attr.aria-label]="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"

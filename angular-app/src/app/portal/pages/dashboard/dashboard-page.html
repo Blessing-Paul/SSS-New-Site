@@ -1,0 +1,100 @@
+<div class="pt-page">
+  <header class="pt-head">
+    <div class="pt-heading-copy">
+      <span class="pt-eyebrow">Portal overview</span>
+      <h1>{{ greeting }}, {{ user()?.name?.split(' ')?.[0] }}</h1>
+      <p>Here's what needs attention across your workspace today.</p>
+    </div>
+  </header>
+
+  <section class="pt-overview-section" aria-labelledby="work-overview-title">
+    <header class="pt-overview-heading">
+      <div><h2 id="work-overview-title">Customer &amp; partner work</h2><p>Requests and conversations that need a response.</p></div>
+    </header>
+    <div class="pt-tiles">
+      @for (tile of workTiles(); track tile.link) {
+        <a class="pt-metric-card" [routerLink]="tile.link">
+          <div class="pt-metric-top">
+            <span class="pt-metric-icon"><i class="bi" [class]="tile.icon" aria-hidden="true"></i></span>
+            <h3>{{ tile.label }}</h3>
+            @if (tile.fresh) { <span class="pt-metric-new">{{ tile.fresh }} new</span> }
+          </div>
+          <strong class="pt-metric-value">{{ tile.open }}</strong>
+          <p>{{ tile.description }}</p>
+          <span class="pt-metric-link">{{ tile.action }} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="pt-overview-section" aria-labelledby="people-overview-title">
+    <header class="pt-overview-heading">
+      <div><h2 id="people-overview-title">People</h2><p>Hiring activity and your current staff directory.</p></div>
+    </header>
+    <div class="pt-tiles pt-tiles-people">
+      @for (tile of peopleTiles(); track tile.link) {
+        <a class="pt-metric-card" [routerLink]="tile.link">
+          <div class="pt-metric-top">
+            <span class="pt-metric-icon"><i class="bi" [class]="tile.icon" aria-hidden="true"></i></span>
+            <h3>{{ tile.label }}</h3>
+            @if (tile.fresh) { <span class="pt-metric-new">{{ tile.fresh }} new</span> }
+          </div>
+          <strong class="pt-metric-value">{{ tile.open }}</strong>
+          <p>{{ tile.description }}</p>
+          <span class="pt-metric-link">{{ tile.action }} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <div class="pt-grid-2">
+    <section class="pt-card">
+      <header class="pt-card-head"><h2>Assigned to me</h2><span class="pt-muted">{{ myQueue().length }} open</span></header>
+      @if (myQueue().length) {
+        <ul class="pt-list">
+          @for (item of myQueue(); track item.id) {
+            <li><a [routerLink]="['/portal/inbox', item.kind, item.id]">
+              <span class="pt-dot" [attr.data-priority]="item.priority"></span>
+              <span class="pt-list-main"><strong>{{ item.subject }}</strong><small>{{ item.reference }} · {{ item.contact.organization || item.contact.name }}</small></span>
+              <span class="pt-status" [attr.data-status]="item.status">{{ statusLabels[item.status] }}</span>
+            </a></li>
+          }
+        </ul>
+      } @else {
+        <p class="pt-empty"><i class="bi bi-check2-circle"></i> Nothing assigned to you right now.</p>
+      }
+    </section>
+
+    <section class="pt-card">
+      <header class="pt-card-head"><h2>Waiting for someone</h2><span class="pt-muted">Unassigned</span></header>
+      @if (unassigned().length) {
+        <ul class="pt-list">
+          @for (item of unassigned(); track item.id) {
+            <li><a [routerLink]="['/portal/inbox', item.kind, item.id]">
+              <span class="pt-dot" [attr.data-priority]="item.priority"></span>
+              <span class="pt-list-main"><strong>{{ item.subject }}</strong><small>{{ inboxes[item.kind].title }} · {{ timeAgo(item.createdAt) }}</small></span>
+              @if (item.priority !== 'normal') { <span class="pt-prio" [attr.data-priority]="item.priority">{{ item.priority }}</span> }
+            </a></li>
+          }
+        </ul>
+      } @else {
+        <p class="pt-empty"><i class="bi bi-inbox"></i> Every request has an owner.</p>
+      }
+    </section>
+  </div>
+
+  @if (canSeeHiring()) {
+    <section class="pt-card">
+      <header class="pt-card-head"><h2>Hiring pipeline</h2><a routerLink="/portal/applications">View all</a></header>
+      <ul class="pt-list">
+        @for (app of pipeline(); track app.id) {
+          <li><a [routerLink]="['/portal/applications', app.id]">
+            <span class="pt-avatar sm">{{ app.name[0] }}</span>
+            <span class="pt-list-main"><strong>{{ app.name }}</strong><small>{{ app.role }} · {{ timeAgo(app.createdAt) }}</small></span>
+            <span class="pt-stage" [attr.data-stage]="app.stage">{{ stageLabels[app.stage] }}</span>
+          </a></li>
+        }
+      </ul>
+    </section>
+  }
+</div>

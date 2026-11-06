@@ -363,41 +363,7 @@
               <li><i class="bi bi-check2"></i> Training &amp; support</li>
             </ul>
           </div>
-          <form class="contact-form" name="project-enquiry" method="POST" data-netlify="true"
-            netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="project-enquiry">
-            <p class="hidden"><label>Do not fill this out: <input name="bot-field"></label></p>
-            <div class="form-heading">
-              <h3>Tell us about your project</h3>
-              <p>Fields marked * are required.</p>
-            </div>
-            <div class="form-row"><label>Full name *<input type="text" name="name" placeholder="Your name" required
-                  autocomplete="name"></label><label>Work email *<input type="email" name="email"
-                  placeholder="you@organization.com" required autocomplete="email"></label></div>
-            <div class="form-row"><label>Organization<input type="text" name="organization"
-                  placeholder="Company or institution" autocomplete="organization"></label><label>Phone number<input
-                  type="tel" name="phone" placeholder="Optional" autocomplete="tel"></label></div>
-            <label>What do you need? *<select name="interest" required>
-                <option value="">Choose a service</option>
-                <option>Custom software or web development</option>
-                <option>School Silo / education technology</option>
-                <option>Servers, cloud or infrastructure</option>
-                <option>Cybersecurity or networking</option>
-                <option>Digital transformation / integrations</option>
-                <option>Office Silo / Training Silo enquiry</option>
-                <option>IT consulting, training or support</option>
-                <option>Partnership or other enquiry</option>
-              </select></label>
-            <label>Tell us a little about the challenge *<textarea name="message" rows="4"
-                placeholder="What are you trying to achieve? What would a good outcome look like?"
-                required></textarea></label>
-            <label class="consent-check"><input type="checkbox" name="consent" value="yes" required><span>I agree that
-                Stable Shield Solutions may use these details to respond to my enquiry. *</span></label>
-            <button class="hh-btn hh-btn-primary btn-submit" type="submit">Send project enquiry <i class="bi bi-send"></i></button>
-            <p class="form-privacy">Please do not include passwords, payment card details or other sensitive information
-              in this form. See our <a href="/privacy">Privacy Notice</a>.</p>
-            <p class="form-success" role="status" aria-live="polite"></p>
-          </form>
+          <app-project-enquiry-form card heading="Tell us about your project" />
         </div>
       </div>
     </section>

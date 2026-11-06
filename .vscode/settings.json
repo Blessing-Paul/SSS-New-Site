@@ -3,5 +3,6 @@
     "printf": true,
     "ng": true,
     "true": true
-  }
+  },
+  "cSpell.words": ["Laravel"]
 }

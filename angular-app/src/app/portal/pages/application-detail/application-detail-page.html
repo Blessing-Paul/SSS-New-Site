@@ -1,0 +1,150 @@
+@if (app(); as app) {
+<div class="pt-page">
+  <a class="pt-back" routerLink="/portal/applications"><i class="bi bi-arrow-left"></i> Staff applications</a>
+  <header class="pt-head">
+    <div class="pt-title-layout">
+      <span class="pt-avatar lg">{{ initials(app.name) }}</span>
+      <div class="pt-heading-copy">
+        <span class="pt-eyebrow">Staff application · {{ app.reference }} · applied {{ app.createdAt | date: 'd MMM y' }}</span>
+        <h1>{{ app.name }}</h1>
+        <p>{{ app.role }} · {{ app.location }}</p>
+      </div>
+    </div>
+    <div class="pt-head-actions">
+      @if (!closed()) {
+        @if (nextStage(); as next) { <button class="pt-btn ghost" type="button" (click)="advance()">Move to {{ stageLabels[next] }} <i class="bi bi-arrow-right"></i></button> }
+        <button class="pt-btn danger-ghost" type="button" (click)="open('reject')">Reject</button>
+        <button class="pt-btn primary" type="button" (click)="open('hire')"><i class="bi bi-person-check"></i> Hire</button>
+      } @else {
+        <span class="pt-stage lg" [attr.data-stage]="app.stage">{{ stageLabels[app.stage] }}</span>
+      }
+    </div>
+  </header>
+
+  <ol class="pt-steps" aria-label="Hiring stage">
+    @for (s of pipeline; track s; let i = $index) {
+      <li [class.done]="stageIndex() > i || app.stage === 'accepted'" [class.current]="app.stage === s">{{ stageLabels[s] }}</li>
+    }
+  </ol>
+
+  @if (flash()) { <p class="pt-flash" role="status">{{ flash() }}</p> }
+
+  @if (panel() === 'hire') {
+    <form class="pt-card pt-panel" (submit)="submitHire($event)">
+      <h2 class="pt-card-title"><i class="bi bi-person-badge"></i> Hire {{ app.name }} and create their staff account</h2>
+      <p class="pt-muted">Their name, phone and location are copied from the application. They'll receive an email to set their password.</p>
+      <div class="pt-form-grid">
+        <label>Company email *<input class="pt-input" type="email" name="email" [value]="suggestedEmail()" required></label>
+        <label>Job title *<input class="pt-input" name="job_title" [value]="app.role === 'General application' ? '' : app.role" required></label>
+        <label>Discipline *
+          <select class="pt-select" name="discipline" required>
+            <option value="">Choose one</option>
+            @for (d of disciplines; track d[0]) { <option [value]="d[0]">{{ d[1] }}</option> }
+          </select>
+        </label>
+        <label>Department *
+          <select class="pt-select" name="department" required>
+            <option value="">Choose one</option>
+            @for (dep of departments; track dep) { <option>{{ dep }}</option> }
+          </select>
+        </label>
+        <label>Start date *<input class="pt-input" type="date" name="start_date" [value]="today" required></label>
+      </div>
+      <fieldset class="pt-checks"><legend>Portal access</legend>
+        @for (role of roles; track role) {
+          <label><input type="checkbox" name="roles[]" [value]="role" [checked]="role === 'staff'"> {{ roleLabels[role] }}</label>
+        }
+      </fieldset>
+      <div class="pt-panel-actions"><button class="pt-btn ghost" type="button" (click)="panel.set('none')">Cancel</button><button class="pt-btn primary" type="submit">Hire and create account</button></div>
+    </form>
+  }
+  @if (panel() === 'reject') {
+    <form class="pt-card pt-panel" (submit)="submitText($event, 'reject')">
+      <h2 class="pt-card-title">Reject application</h2>
+      <label>Message to {{ app.name }} <small class="pt-muted">(optional, sent by email)</small>
+        <textarea class="pt-input" name="body" rows="5">Hello {{ app.name.split(' ')[0] }},
+
+Thank you for applying for {{ app.role }} at Stable Shield Solutions. After careful review, we won't be moving forward with your application at this time. We'll keep your details on file for future roles.
+
+Kind regards,
+Stable Shield HR</textarea></label>
+      <div class="pt-panel-actions"><button class="pt-btn ghost" type="button" (click)="panel.set('none')">Cancel</button><button class="pt-btn danger" type="submit">Reject application</button></div>
+    </form>
+  }
+
+  <div class="pt-detail">
+    <section class="pt-detail-main">
+      <div class="pt-card">
+        <div class="pt-actions-row">
+          <button class="pt-btn ghost sm" type="button" (click)="open('message')"><i class="bi bi-envelope"></i> Email candidate</button>
+          <button class="pt-btn ghost sm" type="button" (click)="open('note')"><i class="bi bi-sticky"></i> Add note</button>
+          @if (!closed()) { <button class="pt-btn ghost sm" type="button" (click)="open('interview')"><i class="bi bi-calendar-plus"></i> Schedule interview</button> }
+        </div>
+        @if (panel() === 'message' || panel() === 'note') {
+          <form class="pt-inline-form" (submit)="submitText($event, panel() === 'message' ? 'message' : 'note')">
+            <textarea class="pt-input" name="body" rows="4" required [placeholder]="panel() === 'message' ? 'Emailed to ' + app.email : 'Only staff can see notes'"></textarea>
+            <button class="pt-btn primary sm" type="submit">{{ panel() === 'message' ? 'Send email' : 'Add note' }}</button>
+          </form>
+        }
+        @if (panel() === 'interview') {
+          <form class="pt-inline-form row" (submit)="submitInterview($event)">
+            <input class="pt-input" type="datetime-local" name="when" required aria-label="Interview date and time">
+            <button class="pt-btn primary sm" type="submit">Schedule</button>
+          </form>
+        }
+        <h2 class="pt-card-title">Activity</h2>
+        @if (app.thread.length) {
+          <ol class="pt-thread">
+            @for (msg of app.thread; track msg.id) {
+              @if (msg.type === 'event') {
+                <li class="pt-event"><i class="bi bi-dot"></i> {{ msg.body }} · <span>{{ timeAgo(msg.createdAt) }}</span></li>
+              } @else {
+                <li class="pt-msg" [attr.data-type]="msg.type">
+                  <span class="pt-avatar sm">{{ initials(msg.authorName) }}</span>
+                  <div class="pt-msg-body"><header><strong>{{ msg.authorName }}</strong><span class="pt-msg-kind">{{ msg.type === 'outbound' ? 'emailed the candidate' : 'internal note' }}</span><time>{{ timeAgo(msg.createdAt) }}</time></header><p>{{ msg.body }}</p></div>
+                </li>
+              }
+            }
+          </ol>
+        } @else { <p class="pt-muted">No activity yet.</p> }
+      </div>
+      @if (app.message) {
+        <div class="pt-card"><h2 class="pt-card-title">Why they're a good fit</h2><p class="pt-prose">{{ app.message }}</p></div>
+      }
+    </section>
+
+    <aside class="pt-detail-side">
+      @if (hiredStaff(); as staff) {
+        <a class="pt-card pt-hired" [routerLink]="['/portal/staff', staff.id]"><i class="bi bi-patch-check-fill"></i><span><strong>Hired</strong>Staff account: {{ staff.email }}</span></a>
+      }
+      <section class="pt-card">
+        <h2 class="pt-card-title">Rating</h2>
+        <div class="pt-rate" role="radiogroup" aria-label="Rating">
+          @for (n of [1, 2, 3, 4, 5]; track n) {
+            <button type="button" role="radio" [attr.aria-checked]="app.rating === n" [class.on]="(app.rating ?? 0) >= n" (click)="rate(n)" [attr.aria-label]="n + ' stars'">★</button>
+          }
+        </div>
+        @if (app.interviewAt) { <p class="pt-muted"><i class="bi bi-calendar-event"></i> Interview {{ app.interviewAt | date: 'EEE d MMM, h:mm a' }}</p> }
+      </section>
+      <section class="pt-card">
+        <h2 class="pt-card-title">Candidate</h2>
+        <a class="pt-contact-line" [href]="'mailto:' + app.email"><i class="bi bi-envelope"></i> {{ app.email }}</a>
+        <a class="pt-contact-line" [href]="'tel:' + app.phone"><i class="bi bi-telephone"></i> {{ app.phone }}</a>
+        @if (app.portfolio) { <a class="pt-contact-line" [href]="app.portfolio" target="_blank" rel="noopener"><i class="bi bi-link-45deg"></i> Portfolio</a> }
+        <a class="pt-file" [href]="app.cvUrl || null" [attr.aria-disabled]="!app.cvUrl"><i class="bi bi-file-earmark-person"></i><span>{{ app.cvFileName }}<small>{{ app.cvUrl ? 'Download CV' : 'Available when the backend is connected' }}</small></span></a>
+      </section>
+      <section class="pt-card">
+        <h2 class="pt-card-title">Application</h2>
+        <dl class="pt-dl">
+          <div><dt>Experience</dt><dd>{{ app.experience }}</dd></div>
+          <div><dt>Availability</dt><dd>{{ app.availability }}</dd></div>
+          <div><dt>Eligible to work in Nigeria</dt><dd>{{ app.workEligibility }}</dd></div>
+          <div><dt>Work arrangement</dt><dd>{{ app.workArrangement }}</dd></div>
+        </dl>
+      </section>
+    </aside>
+  </div>
+</div>
+} @else {
+  <div class="pt-page"><p class="pt-empty">Application not found. <a routerLink="/portal/applications">Back to applications</a></p></div>
+}

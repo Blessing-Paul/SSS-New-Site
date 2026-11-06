@@ -47,9 +47,8 @@
       <div class="site-container">
         <div class="ps-head center reveal"><span class="kicker">Partner application</span><h2 class="ps-title">Apply to become <em>a partner.</em></h2><p class="ps-lead">About 5 minutes. Fields marked * are required. You can review everything before submitting.</p></div>
 
-        <form class="form-p" id="partner-form" #partnerForm name="partner-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate style="max-width:900px;margin-inline:auto" (submit)="onSubmit($event)">
-          <input type="hidden" name="form-name" value="partner-application">
-          <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+        <form class="form-p" id="partner-form" #partnerForm style="max-width:900px;margin-inline:auto" (submit)="onSubmit($event)" appFormSubmit="partner-application" (submitted)="onSubmitted($event)">
+          <p hidden aria-hidden="true"><label>Leave this blank <input name="website_hp" tabindex="-1" autocomplete="off"></label></p>
 
           <ol class="stepper" aria-label="Application progress">
             <li [class.done]="currentStep > 0" [class.current]="currentStep === 0" [attr.aria-current]="currentStep === 0 ? 'step' : null">Partnership</li>
@@ -73,11 +72,12 @@
                 <legend>Which product or service is this for? *</legend>
                 <div class="choices">
                   @for (item of siloProducts; track item.slug) {
-                    <label class="choice"><input type="checkbox" name="products" [value]="item.name" [checked]="item.name === prefillProduct"><span><i class="bi" [class]="item.icon"></i>{{ item.name }}</span></label>
+                    <label class="choice"><input type="checkbox" name="products[]" [value]="item.name" [checked]="item.name === prefillProduct"><span><i class="bi" [class]="item.icon"></i>{{ item.name }}</span></label>
                   }
-                  <label class="choice"><input type="checkbox" name="products" value="Custom software / services"><span><i class="bi bi-code-slash"></i>Custom software &amp; services</span></label>
-                  <label class="choice"><input type="checkbox" name="products" value="Infrastructure & security"><span><i class="bi bi-hdd-network"></i>Infrastructure &amp; security</span></label>
-                  <label class="choice"><input type="checkbox" name="products" value="My in-house project"><span><i class="bi bi-kanban"></i>Our in-house project</span></label>
+                  @for (group of serviceGroups; track group.name) {
+                    <label class="choice"><input type="checkbox" name="products[]" [value]="group.name + ' services'"><span><i class="bi" [class]="group.icon"></i>{{ group.name }} services<small>{{ group.examples }}</small></span></label>
+                  }
+                  <label class="choice"><input type="checkbox" name="products[]" value="My in-house project"><span><i class="bi bi-kanban"></i>Our in-house project</span></label>
                 </div>
               </div>
             </div>
@@ -112,10 +112,39 @@
             <h3>Partnership details</h3>
             <p>Tell us what you bring and what you'd like to achieve.</p>
             <div class="f-stack">
-              <label>Your capabilities and experience *<textarea name="capabilities" required placeholder="Services, products, technical skills, certifications and relevant clients or projects"></textarea></label>
-              <div class="f-row">
-                <label>Markets / regions you cover<input name="regions" placeholder="e.g. Lagos, South-West, West Africa"></label>
-                <label>Sectors you serve<input name="sectors" placeholder="e.g. Schools, NGOs, government"></label>
+              <div class="f-stack" [hidden]="isCoDevelopment">
+                <label>Your capabilities and experience *<textarea name="capabilities" [required]="!isCoDevelopment" placeholder="Services, products, technical skills and relevant clients or projects"></textarea></label>
+                <div class="f-row">
+                  <label>Markets / regions you cover<input name="regions" placeholder="e.g. Lagos, South-West, West Africa"></label>
+                  <label>Sectors you serve<input name="sectors" placeholder="e.g. Schools, NGOs, government"></label>
+                </div>
+              </div>
+
+              <div class="f-stack" [hidden]="partnershipKey !== 'reseller'">
+                <div class="f-row">
+                  <label>Existing customer base *<select name="customer_base" [required]="partnershipKey === 'reseller'"><option value="">Choose one</option><option>Under 20 organizations</option><option>20–100 organizations</option><option>100–500 organizations</option><option>500+ organizations</option></select></label>
+                  <label>Sales / account team size<select name="sales_team"><option>Just me</option><option>2–5</option><option>6–20</option><option>20+</option></select></label>
+                </div>
+                <label>Products you already sell or represent<input name="current_portfolio" placeholder="e.g. school management software, hardware, ERP"></label>
+              </div>
+
+              <div class="f-stack" [hidden]="partnershipKey !== 'implementation'">
+                <div class="f-row">
+                  <label>Technical staff *<select name="technical_staff" [required]="partnershipKey === 'implementation'"><option value="">Choose one</option><option>1–5</option><option>6–20</option><option>21–50</option><option>50+</option></select></label>
+                  <label>Projects you can run at once<select name="delivery_capacity"><option>1</option><option>2–3</option><option>4–10</option><option>10+</option></select></label>
+                </div>
+                <label>Certifications &amp; accreditations<input name="certifications" placeholder="e.g. Cisco, Microsoft, AWS, ISO 27001"></label>
+              </div>
+
+              <div class="f-stack" [hidden]="partnershipKey !== 'technology'">
+                <div class="f-row">
+                  <label>Product / platform name *<input name="tech_product" [required]="partnershipKey === 'technology'"></label>
+                  <label>Product website or docs<input type="url" name="tech_url" placeholder="https://"></label>
+                </div>
+                <div class="f-row">
+                  <label>Integration type *<select name="integration_type" [required]="partnershipKey === 'technology'"><option value="">Choose one</option><option>REST / GraphQL API</option><option>Single sign-on (SSO)</option><option>Payments</option><option>Messaging (SMS, email, WhatsApp)</option><option>Hardware / devices</option><option>Data import / export</option><option>Other</option></select></label>
+                  <label>API or sandbox available?<select name="api_available"><option>Yes, documented</option><option>Yes, on request</option><option>Not yet</option></select></label>
+                </div>
               </div>
               <div class="co-dev-only f-stack" [hidden]="!isCoDevelopment">
                 <label>About your in-house project *<textarea name="project_description" [required]="isCoDevelopment" placeholder="What are you building, what stage is it at, and what help do you need?"></textarea></label>
@@ -127,7 +156,11 @@
               </div>
               <div class="f-row">
                 <label>Expected timeline<select name="timeline"><option>Immediately</option><option>Within 3 months</option><option>3–6 months</option><option>Exploring options</option></select></label>
-                <label>Estimated annual opportunity / budget<select name="budget"><option>Prefer not to say</option><option>Under ₦5m</option><option>₦5m–₦25m</option><option>₦25m–₦100m</option><option>Above ₦100m</option></select></label>
+                @if (isCoDevelopment) {
+                  <label>Budget for this project <small class="f-hint">what you plan to spend with us</small><select name="project_budget"><option>Prefer not to say</option><option>Under ₦5m</option><option>₦5m–₦25m</option><option>₦25m–₦100m</option><option>Above ₦100m</option></select></label>
+                } @else {
+                  <label>Expected annual business you could bring <small class="f-hint">estimated deal value in year one</small><select name="opportunity_value"><option>Prefer not to say</option><option>Under ₦5m</option><option>₦5m–₦25m</option><option>₦25m–₦100m</option><option>Above ₦100m</option></select></label>
+                }
               </div>
               <label>Partnership goals *<textarea name="goals" required placeholder="What would a successful partnership look like for you?"></textarea></label>
               <label>How did you hear about us?<select name="source"><option>Referral</option><option>Search engine</option><option>Social media</option><option>Event</option><option>Existing client</option><option>Other</option></select></label>
@@ -153,6 +186,7 @@
             <button class="btn-p primary" type="submit" [hidden]="currentStep !== 4">Submit application <i class="bi bi-send"></i></button>
           </div>
           <p class="f-status" role="status" aria-live="polite">{{ status }}</p>
+          <p class="f-status" role="status" aria-live="polite" data-form-status></p>
         </form>
       </div>
     </section>

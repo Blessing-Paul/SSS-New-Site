@@ -1,7 +1,11 @@
+@if (!inPortal) {
 <div id="site-navbar">
   <app-site-header></app-site-header>
 </div>
+}
 <router-outlet></router-outlet>
+@if (!inPortal) {
 <div id="site-footer">
   <app-site-footer></app-site-footer>
 </div>
+}

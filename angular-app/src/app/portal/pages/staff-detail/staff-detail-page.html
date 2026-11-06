@@ -1,0 +1,89 @@
+@if (member() || (isNew() && canManage())) {
+@let m = member();
+<div class="pt-page">
+  @if (!self) { <a class="pt-back" routerLink="/portal/staff"><i class="bi bi-arrow-left"></i> Staff directory</a> }
+  <header class="pt-head">
+    <div class="pt-title-layout">
+      <span class="pt-avatar lg">{{ m ? initials(m.name) : '+' }}</span>
+      <div class="pt-heading-copy">
+        @if (m) { <span class="pt-eyebrow">Staff directory · {{ m.department }}</span> }
+        @if (isNew()) { <span class="pt-eyebrow">People · New staff record</span> }
+        <h1>{{ isNew() ? 'Add staff member' : m?.name }}</h1>
+        @if (m) { <p>{{ m.jobTitle }} · {{ disciplineLabels[m.discipline] }} · {{ m.department }}</p> }
+        @if (isNew()) { <p>For existing employees. New hires should come through Staff applications.</p> }
+      </div>
+    </div>
+    @if (m && canManage() && !isMe()) {
+      <div class="pt-head-actions">
+        <button class="pt-btn" [class.danger-ghost]="m.active" [class.ghost]="!m.active" type="button" (click)="toggleActive()">
+          <i class="bi" [class.bi-person-slash]="m.active" [class.bi-person-check]="!m.active"></i> {{ m.active ? 'Deactivate' : 'Reactivate' }}
+        </button>
+      </div>
+    }
+  </header>
+
+  @if (welcome) { <p class="pt-flash success"><i class="bi bi-patch-check-fill"></i> Staff account created. They'll get an email to set their password.</p> }
+  @if (flash()) { <p class="pt-flash" role="status">{{ flash() }}</p> }
+
+  <div class="pt-detail">
+    <form class="pt-detail-main pt-card" (submit)="save($event)">
+      <h2 class="pt-card-title">Work details</h2>
+      <div class="pt-form-grid">
+        <label>Full name *<input class="pt-input" name="name" [value]="m?.name ?? ''" required [disabled]="!canManage()"></label>
+        <label>Company email *<input class="pt-input" type="email" name="email" [value]="m?.email ?? ''" required [disabled]="!canManage()"></label>
+        <label>Job title *<input class="pt-input" name="job_title" [value]="m?.jobTitle ?? ''" required [disabled]="!canManage()"></label>
+        <label>Discipline *
+          <select class="pt-select" name="discipline" required [disabled]="!canManage()">
+            <option value="">Choose one</option>
+            @for (d of disciplines; track d[0]) { <option [value]="d[0]" [selected]="m?.discipline === d[0]">{{ d[1] }}</option> }
+          </select>
+        </label>
+        <label>Department *
+          <select class="pt-select" name="department" required [disabled]="!canManage()">
+            <option value="">Choose one</option>
+            @for (dep of departments; track dep) { <option [selected]="m?.department === dep">{{ dep }}</option> }
+          </select>
+        </label>
+        <label>Start date *<input class="pt-input" type="date" name="start_date" [value]="m?.startedAt ?? today" required [disabled]="!canManage()"></label>
+      </div>
+
+      <h2 class="pt-card-title">Contact</h2>
+      <div class="pt-form-grid">
+        <label>Phone<input class="pt-input" type="tel" name="phone" [value]="m?.phone ?? ''" [disabled]="!editable()"></label>
+        <label>Location<input class="pt-input" name="location" [value]="m?.location ?? ''" [disabled]="!editable()"></label>
+      </div>
+
+      <fieldset class="pt-checks" [disabled]="!canManage()"><legend>Portal access</legend>
+        @for (role of roles; track role) {
+          <label><input type="checkbox" name="roles[]" [value]="role" [checked]="m ? m.roles.includes(role) : role === 'staff'"> {{ roleLabels[role] }}</label>
+        }
+      </fieldset>
+      @if (!canManage()) { <p class="pt-muted"><i class="bi bi-info-circle"></i> Ask HR to change your job details or access.</p> }
+
+      @if (editable()) {
+        <div class="pt-panel-actions"><button class="pt-btn primary" type="submit">{{ isNew() ? 'Create staff account' : 'Save changes' }}</button></div>
+      }
+    </form>
+
+    @if (m) {
+      <aside class="pt-detail-side">
+        <section class="pt-card">
+          <h2 class="pt-card-title">Account</h2>
+          <dl class="pt-dl">
+            <div><dt>Status</dt><dd>{{ m.active ? 'Active' : 'Deactivated' }}</dd></div>
+            <div><dt>Started</dt><dd>{{ m.startedAt | date: 'd MMM y' }}</dd></div>
+            <div><dt>Access</dt><dd>{{ roleList(m.roles) }}</dd></div>
+          </dl>
+        </section>
+        @if (application(); as app) {
+          @if (canManage()) {
+            <a class="pt-card pt-hired" [routerLink]="['/portal/applications', app.id]"><i class="bi bi-file-earmark-person"></i><span><strong>Hired via {{ app.reference }}</strong>View original application</span></a>
+          }
+        }
+      </aside>
+    }
+  </div>
+</div>
+} @else {
+  <div class="pt-page"><p class="pt-empty">Staff member not found. <a routerLink="/portal/staff">Back to the directory</a></p></div>
+}

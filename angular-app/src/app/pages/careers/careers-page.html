@@ -101,26 +101,7 @@
             <figcaption><i class="bi bi-people-fill"></i><span><strong>Join a growing team</strong>Engineers, analysts and support specialists building systems that matter.</span></figcaption>
           </figure>
         </div>
-        <form class="form-p f-stack reveal" data-preview-form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
-          <input type="hidden" name="form-name" value="career-application">
-          <p hidden><label>Do not fill this out: <input name="bot-field"></label></p>
-          <div class="form-head">
-            <h3>Job application</h3>
-            <p>Fields marked * are required.</p>
-          </div>
-          <div class="f-row"><label>Full name *<input type="text" name="name" placeholder="Your name" required autocomplete="name"></label><label>Email *<input type="email" name="email" placeholder="you@example.com" required autocomplete="email"></label></div>
-          <div class="f-row"><label>Phone number *<input type="tel" name="phone" placeholder="+234…" required autocomplete="tel"></label><label>LinkedIn or portfolio<input type="url" name="portfolio" placeholder="https://"></label></div>
-          <label>Role *<select name="role" id="apply-role" required [value]="selectedRole" (change)="onRoleChange($event)">
-              <option value="">Choose a role</option>
-              <option>General application</option>
-              @for (job of jobs; track job.id) { <option [value]="job.title">{{ job.title }}</option> }
-            </select></label>
-          <label>CV / résumé * <small class="f-hint">PDF or Word, max 8 MB</small><input type="file" name="cv" accept=".pdf,.doc,.docx" required></label>
-          <label>Why are you a good fit?<textarea name="message" placeholder="A short note about your experience and interests"></textarea></label>
-          <label class="f-check"><input type="checkbox" name="consent" required> I agree that Stable Shield Solutions may store my details to assess this application, as described in the <a href="/privacy">privacy notice</a>.</label>
-          <button class="btn-p primary" type="submit">Submit application <i class="bi bi-send" aria-hidden="true"></i></button>
-          <p class="f-status" role="status"></p>
-        </form>
+        <app-job-application-form class="reveal" card />
       </div>
     </section>
   </main>

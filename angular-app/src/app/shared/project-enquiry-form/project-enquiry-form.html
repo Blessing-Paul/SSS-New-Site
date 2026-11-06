@@ -1,0 +1,56 @@
+<form class="form-p f-stack pef" appFormSubmit="project-enquiry">
+  <p hidden aria-hidden="true"><label>Leave this blank <input name="website_hp" tabindex="-1" autocomplete="off"></label></p>
+  @if (heading) {
+    <div class="pef-head"><h3>{{ heading }}</h3><p>Fields marked * are required.</p></div>
+  }
+  <div class="f-row">
+    <label>Full name *<input name="name" required autocomplete="name" placeholder="Your name"></label>
+    <label>Work email *<input type="email" name="email" required autocomplete="email" placeholder="you@organization.com"></label>
+  </div>
+  <div class="f-row">
+    <label>Phone<input type="tel" name="phone" autocomplete="tel" placeholder="Optional"></label>
+    <label>Job title / role<input name="job_title" autocomplete="organization-title" placeholder="Optional"></label>
+  </div>
+  <div class="f-row">
+    <label>Organization<input name="organization" autocomplete="organization" placeholder="Company or institution"></label>
+    <label>Organization type
+      <select name="organization_type">
+        <option value="">Choose one</option>
+        @for (type of organizationTypes; track type) { <option>{{ type }}</option> }
+      </select>
+    </label>
+  </div>
+  <div class="f-row">
+    <label>What do you need? *
+      <select name="service" id="enquiry-service" required>
+        <option value="" [selected]="!selectedService">Choose a service</option>
+        @for (group of groups; track group) {
+          <optgroup [label]="group">
+            @for (service of servicesIn(group); track service.slug) {
+              <option [value]="service.slug" [selected]="service.slug === selectedService">{{ service.name }}</option>
+            }
+          </optgroup>
+        }
+        <optgroup label="Other">
+          @for (extra of extras; track extra.slug) {
+            <option [value]="extra.slug" [selected]="extra.slug === selectedService">{{ extra.name }}</option>
+          }
+        </optgroup>
+      </select>
+    </label>
+    <label>Target timeline
+      <select name="timeline">
+        <option value="">Not sure yet</option>
+        <option>As soon as possible</option>
+        <option>Within 1–3 months</option>
+        <option>Within 3–6 months</option>
+        <option>Later than 6 months</option>
+      </select>
+    </label>
+  </div>
+  <label>Project details *<textarea name="message" required placeholder="What are you trying to achieve? What would a good outcome look like?"></textarea></label>
+  <label class="f-check"><input type="checkbox" name="consent" required> I agree that Stable Shield Solutions may use these details to respond, as described in the <a href="/privacy">privacy notice</a>.</label>
+  <button class="btn-p primary" type="submit">Send enquiry <i class="bi bi-send" aria-hidden="true"></i></button>
+  <p class="pef-note">Please don't include passwords, payment card details or other sensitive information.</p>
+  <p class="f-status" role="status" aria-live="polite" data-form-status></p>
+</form>

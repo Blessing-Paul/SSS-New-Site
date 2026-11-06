@@ -1,0 +1,41 @@
+<div class="pt-page">
+  <header class="pt-head">
+    <div class="pt-title-layout">
+      <span class="pt-heading-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+      <div class="pt-heading-copy">
+        <span class="pt-eyebrow">People · Directory</span>
+        <h1>Staff directory</h1>
+        <p>{{ members().length }} people. New staff are added by hiring them from <a routerLink="/portal/applications">Staff applications</a>@if (canManage()) { or with <a routerLink="/portal/staff/new">Add staff</a>}.</p>
+      </div>
+    </div>
+    @if (canManage()) { <a class="pt-btn primary" routerLink="/portal/staff/new"><i class="bi bi-plus-lg"></i> Add staff</a> }
+  </header>
+
+  <div class="pt-toolbar">
+    <label class="pt-search"><i class="bi bi-search" aria-hidden="true"></i>
+      <input type="search" placeholder="Search name, email, title or discipline" (input)="setQuery($event)" aria-label="Search staff">
+    </label>
+    <select class="pt-select" (change)="setDepartment($event)" aria-label="Department">
+      <option value="">All departments</option>
+      @for (dep of departments; track dep) { <option>{{ dep }}</option> }
+    </select>
+    @if (canManage()) { <label class="pt-inline"><input type="checkbox" (change)="setInactive($event)"> Show deactivated</label> }
+  </div>
+
+  <div class="pt-people">
+    @for (m of members(); track m.id) {
+      <a class="pt-card pt-person" [class.inactive]="!m.active" [routerLink]="[m.id]">
+        <span class="pt-avatar lg">{{ initials(m.name) }}</span>
+        <strong>{{ m.name }}</strong>
+        <span>{{ m.jobTitle }}</span>
+        <small>{{ disciplineLabels[m.discipline] }} · {{ m.department }}</small>
+        <span class="pt-roles">
+          @for (role of m.roles; track role) { @if (role !== 'staff') { <span class="pt-chip">{{ roleLabels[role] }}</span> } }
+          @if (!m.active) { <span class="pt-chip off">Deactivated</span> }
+        </span>
+      </a>
+    } @empty {
+      <p class="pt-empty">No one matches that search.</p>
+    }
+  </div>
+</div>

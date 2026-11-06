@@ -1,3 +1,4 @@
+import { FormSubmitDirective } from '../../shared/form-submit.directive';
 import { Component } from '@angular/core';
 import {
   PRODUCT_CATEGORIES,
@@ -12,6 +13,7 @@ import {
 @Component({
   selector: 'app-products-page',
   standalone: true,
+  imports: [FormSubmitDirective],
   templateUrl: './products-page.html'
 })
 export class ProductsPageComponent {

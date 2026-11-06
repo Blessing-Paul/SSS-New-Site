@@ -1,0 +1,20 @@
+:host { display: block; min-width: 0; }
+:host(.is-card) .jaf {
+  padding: clamp(22px, 3vw, 36px);
+  border: 1px solid var(--p-line);
+  border-radius: 18px;
+  background: var(--p-card);
+  box-shadow: 0 24px 60px -32px rgba(10, 25, 45, 0.35);
+}
+.jaf-head h3 { margin: 0 0 6px; font-size: 22px; color: var(--p-head); }
+.jaf-head p { margin: 0; color: var(--p-muted); font-size: 14px; }
+.jaf-group { display: grid; gap: 16px; padding-top: 18px; border-top: 1px solid var(--p-line); }
+.jaf-group legend {
+  float: left; width: 100%; padding: 0; margin-bottom: 2px;
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--p-red);
+}
+.jaf-group legend + * { clear: both; }
+.jaf-role { margin: -6px 0 0; font-size: 13px; color: var(--p-muted); }
+.jaf-role i { color: var(--p-red); }
+.jaf-alert { margin: 0; padding: 10px 14px; border-radius: 10px; background: var(--p-red-soft); font-size: 14px; }
+.jaf .btn-p { justify-self: start; }

@@ -1,0 +1,116 @@
+@if (item(); as item) {
+<div class="pt-page">
+  <a class="pt-back" [routerLink]="['/portal/inbox', kind()]"><i class="bi bi-arrow-left"></i> {{ config().title }}</a>
+  <header class="pt-head">
+    <div class="pt-title-layout">
+      <span class="pt-heading-icon"><i class="bi" [class]="config().icon" aria-hidden="true"></i></span>
+      <div class="pt-heading-copy">
+        <span class="pt-eyebrow">{{ config().singular }} · {{ item.reference }} · received {{ item.createdAt | date: 'd MMM y, h:mm a' }}</span>
+        <h1>{{ item.subject }}</h1>
+      </div>
+    </div>
+    <div class="pt-head-actions">
+      <span class="pt-status lg" [attr.data-status]="item.status">{{ statusLabels[item.status] }}</span>
+      @if (item.priority !== 'normal') { <span class="pt-prio" [attr.data-priority]="item.priority">{{ item.priority }}</span> }
+    </div>
+  </header>
+
+  <div class="pt-detail">
+    <section class="pt-detail-main">
+      <ol class="pt-thread">
+        @for (msg of item.thread; track msg.id) {
+          @if (msg.type === 'event') {
+            <li class="pt-event"><i class="bi bi-dot"></i> {{ msg.body }} · <span>{{ timeAgo(msg.createdAt) }}</span></li>
+          } @else {
+            <li class="pt-msg" [attr.data-type]="msg.type">
+              <span class="pt-avatar sm">{{ initials(msg.authorName) }}</span>
+              <div class="pt-msg-body">
+                <header>
+                  <strong>{{ msg.authorName }}</strong>
+                  <span class="pt-msg-kind">{{ msg.type === 'inbound' ? 'wrote' : msg.type === 'outbound' ? 'replied by email' : 'internal note' }}</span>
+                  <time [title]="msg.createdAt | date: 'medium'">{{ timeAgo(msg.createdAt) }}</time>
+                </header>
+                <p>{{ msg.body }}</p>
+              </div>
+            </li>
+          }
+        }
+      </ol>
+
+      <div class="pt-composer" [attr.data-mode]="mode()">
+        <div class="pt-tabs" role="tablist">
+          <button type="button" role="tab" [attr.aria-selected]="mode() === 'reply'" (click)="startReply()"><i class="bi bi-reply"></i> Reply to {{ item.contact.name }}</button>
+          <button type="button" role="tab" [attr.aria-selected]="mode() === 'note'" (click)="mode.set('note')"><i class="bi bi-sticky"></i> Internal note</button>
+        </div>
+        <textarea rows="6" [value]="draft()" (input)="onDraft($event)" (focus)="mode() === 'reply' && !draft() ? startReply() : null"
+          [placeholder]="mode() === 'reply' ? 'Write your reply. It will be emailed to ' + item.contact.email : 'Only staff can see notes.'"></textarea>
+        <footer>
+          @if (mode() === 'reply') {
+            <label class="pt-inline">Then set status
+              <select class="pt-select sm" (change)="setAfterReply($event)">
+                @for (status of config().statuses; track status) {
+                  <option [value]="status" [selected]="status === afterReply()">{{ statusLabels[status] }}</option>
+                }
+              </select>
+            </label>
+          } @else { <span class="pt-muted"><i class="bi bi-lock"></i> Not sent to the customer</span> }
+          <button class="pt-btn primary" type="button" [disabled]="!draft().trim()" (click)="send()">
+            @if (mode() === 'reply') { <i class="bi bi-send"></i> Send reply } @else { <i class="bi bi-plus-lg"></i> Add note }
+          </button>
+        </footer>
+        @if (flash()) { <p class="pt-flash" role="status">{{ flash() }}</p> }
+      </div>
+    </section>
+
+    <aside class="pt-detail-side">
+      <section class="pt-card">
+        <h2 class="pt-card-title">Contact</h2>
+        <div class="pt-contact">
+          <span class="pt-avatar">{{ initials(item.contact.name) }}</span>
+          <div><strong>{{ item.contact.name }}</strong>
+            @if (item.contact.jobTitle || item.contact.organization) { <small>{{ item.contact.jobTitle }}{{ item.contact.jobTitle && item.contact.organization ? ', ' : '' }}{{ item.contact.organization }}</small> }
+          </div>
+        </div>
+        <a class="pt-contact-line" [href]="'mailto:' + item.contact.email"><i class="bi bi-envelope"></i> {{ item.contact.email }}</a>
+        @if (item.contact.phone) { <a class="pt-contact-line" [href]="'tel:' + item.contact.phone"><i class="bi bi-telephone"></i> {{ item.contact.phone }}</a> }
+      </section>
+
+      <section class="pt-card">
+        <h2 class="pt-card-title">Manage</h2>
+        <div class="pt-fields">
+          <label>Status
+            <select class="pt-select" (change)="setStatus($event)">
+              @for (status of config().statuses; track status) { <option [value]="status" [selected]="status === item.status">{{ statusLabels[status] }}</option> }
+            </select>
+          </label>
+          <label>Priority
+            <select class="pt-select" (change)="setPriority($event)">
+              <option value="normal" [selected]="item.priority === 'normal'">Normal</option>
+              <option value="high" [selected]="item.priority === 'high'">High</option>
+              <option value="critical" [selected]="item.priority === 'critical'">Critical</option>
+            </select>
+          </label>
+          <label>Owner
+            <select class="pt-select" (change)="setAssignee($event)">
+              <option value="" [selected]="!item.assigneeId">Unassigned</option>
+              @for (member of owners(); track member.id) { <option [value]="member.id" [selected]="member.id === item.assigneeId">{{ member.name }}</option> }
+            </select>
+          </label>
+          <button class="pt-btn ghost" type="button" (click)="assignToMe()"><i class="bi bi-person-check"></i> Assign to me</button>
+        </div>
+      </section>
+
+      <section class="pt-card">
+        <h2 class="pt-card-title">Submitted details</h2>
+        <dl class="pt-dl">
+          @for (field of item.fields | keyvalue: keepOrder; track field.key) {
+            <div><dt>{{ field.key }}</dt><dd>{{ field.value }}</dd></div>
+          }
+        </dl>
+      </section>
+    </aside>
+  </div>
+</div>
+} @else {
+  <div class="pt-page"><p class="pt-empty"><i class="bi bi-question-circle"></i> This item doesn't exist or was removed. <a [routerLink]="['/portal/inbox', kind()]">Back to the list</a></p></div>
+}

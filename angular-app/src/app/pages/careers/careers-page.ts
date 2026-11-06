@@ -1,16 +1,17 @@
+import { JobApplicationFormComponent } from '../../shared/job-application-form/job-application-form';
 import { Component, OnInit } from '@angular/core';
 import { JobPosting, JobsService } from '../../core/jobs.service';
 
 @Component({
   selector: 'app-careers-page',
   standalone: true,
+  imports: [JobApplicationFormComponent],
   templateUrl: './careers-page.html'
 })
 export class CareersPageComponent implements OnInit {
   jobs: JobPosting[] = [];
   departments: string[] = ['All'];
   selectedDepartment = 'All';
-  selectedRole = '';
   loadFailed = false;
 
   constructor(private readonly jobsService: JobsService) {}
@@ -32,10 +33,6 @@ export class CareersPageComponent implements OnInit {
     return this.selectedDepartment === 'All'
       ? this.jobs
       : this.jobs.filter((job) => job.department === this.selectedDepartment);
-  }
-
-  onRoleChange(event: Event): void {
-    if (event.target instanceof HTMLSelectElement) this.selectedRole = event.target.value;
   }
 
   applicationUrl(role: string): string {

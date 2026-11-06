@@ -6,9 +6,9 @@ describe('site routes', () => {
       .filter((route) => route.loadComponent)
       .map((route) => route.path);
     const expectedPaths = [
-      '', 'index-copy', 'about', 'accessibility', 'apply', 'careers', 'contact', 'industries', 'login', 'unauthorized',
-      'office-silo', 'partners', 'portal', 'privacy', 'products', 'resources',
-      'school-silo', 'services', 'support', 'terms', 'training-silo', '**'
+      '', 'index-copy', 'about', 'access', 'accessibility', 'apply', 'careers', 'contact', 'industries', 'login', 'unauthorized',
+      'partners', 'portal', 'privacy', 'products', 'products/:slug', 'resources',
+      'services', 'support', 'terms', '**'
     ];
     expect(new Set(componentPaths)).toEqual(new Set(expectedPaths));
     expect(componentPaths.some((path) => path?.endsWith('.html'))).toBeFalse();
@@ -22,6 +22,17 @@ describe('site routes', () => {
     expect(redirects.get('about.html')).toBe('about');
     expect(redirects.get('index.html')).toBe('');
     expect(redirects.get('index copy.html')).toBe('index-copy');
+  });
+
+  it('redirects the old Silo pages to their product detail pages', () => {
+    const redirects = new Map(
+      routes.filter((route) => route.redirectTo !== undefined)
+        .map((route) => [route.path, route.redirectTo])
+    );
+    for (const silo of ['school-silo', 'office-silo', 'training-silo']) {
+      expect(redirects.get(silo)).toBe(`products/${silo}`);
+      expect(redirects.get(`${silo}.html`)).toBe(`products/${silo}`);
+    }
   });
 
   it('renders a not-found page for unmatched URLs', () => {
